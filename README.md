@@ -170,3 +170,5 @@ License
 -------
 
 Hcash is released under the terms of the MIT license. To get more information please refer to  https://opensource.org/licenses/MIT.
+
+GDW主链
