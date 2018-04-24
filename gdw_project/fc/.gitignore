@@ -36,7 +36,6 @@ Release/
 CMakeCache.txt
 CMakeFiles
 Makefile
-*.cmake
 *.cbp
 
 libfc.a
