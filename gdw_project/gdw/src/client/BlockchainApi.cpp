@@ -497,11 +497,7 @@ namespace gdwcore {
                                 summary.trx_type = pretty_contract_trx.trx_type;
                                 summary.contract_address = pretty_contract_trx.to_contract_ledger_entry.to_account;
 								summary.is_completed = pretty_contract_trx.is_completed;
-
-								if (NOT pretty_contract_trx.from_contract_ledger_entries.empty())
-								{
-									summary.from_address = pretty_contract_trx.from_contract_ledger_entries[0].from_account;
-								}
+								summary.from_address = pretty_contract_trx.to_contract_ledger_entry.from_account;
 
                                 if (summary.trx_type == gdwcore::consensus::TransactionType::contract_call_transaction)
                                 {
