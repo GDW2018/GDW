@@ -498,6 +498,7 @@ namespace gdwcore {
                                 summary.contract_address = pretty_contract_trx.to_contract_ledger_entry.to_account;
 								summary.is_completed = pretty_contract_trx.is_completed;
 								summary.from_address = pretty_contract_trx.to_contract_ledger_entry.from_account;
+								summary.fee = pretty_contract_trx.to_contract_ledger_entry.fee;
 
                                 if (summary.trx_type == gdwcore::consensus::TransactionType::contract_call_transaction)
                                 {

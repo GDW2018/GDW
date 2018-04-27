@@ -98,6 +98,7 @@ namespace gdwcore {
             std::string             method;
             std::string             params;
 			bool					is_completed;
+			Asset					fee;
         };
         struct PrettyReserveBalance
         {
@@ -197,6 +198,7 @@ FC_REFLECT(gdwcore::wallet::ContractTransactionSummary,
 (method)
 (params)
 (is_completed)
+(fee)
 )
 FC_REFLECT(gdwcore::wallet::PrettyReserveBalance,
 (balance_id)

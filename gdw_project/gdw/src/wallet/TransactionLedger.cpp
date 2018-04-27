@@ -2521,13 +2521,13 @@ PrettyContractTransaction		Wallet::to_pretty_contract_trx(const gdwcore::consens
         {
             to_contract_ledger_entry.fee = Asset(all_cost - GDW_DEFAULT_CONTRACT_MARGIN, 0);
             //to_contract_ledger_entry.memo = "register contract success";
-            pretty_trx.is_completed = 0;
+            pretty_trx.is_completed = true;
         }
         else
         {
             to_contract_ledger_entry.fee = Asset(all_cost, 0);
             //to_contract_ledger_entry.memo = "register contract not success";
-            pretty_trx.is_completed = 1;
+            pretty_trx.is_completed = false;
         }
 
         pretty_trx.to_contract_ledger_entry = to_contract_ledger_entry;
@@ -2617,7 +2617,7 @@ PrettyContractTransaction		Wallet::to_pretty_contract_trx(const gdwcore::consens
         if (upgrade_success)
         { 
             //to_contract_ledger_entry.memo = "upgrade contract success";
-            pretty_trx.is_completed = 0;
+            pretty_trx.is_completed = true;
 
             // 保证金出账结果交易
             ShareType withdraw_margin = withdraw_from_contract - deposit_to_account;
@@ -2639,7 +2639,7 @@ PrettyContractTransaction		Wallet::to_pretty_contract_trx(const gdwcore::consens
         else
         {
             //to_contract_ledger_entry.memo = "upgrade contract not success";
-            pretty_trx.is_completed = 1;
+            pretty_trx.is_completed = false;
         }
         
         pretty_trx.to_contract_ledger_entry = to_contract_ledger_entry;
@@ -2736,12 +2736,12 @@ PrettyContractTransaction		Wallet::to_pretty_contract_trx(const gdwcore::consens
         if (destroy_success)
         {
             //to_contract_ledger_entry.memo = "destroy contract success";
-            pretty_trx.is_completed = 0;
+            pretty_trx.is_completed = true;
         }
         else
         {
             //to_contract_ledger_entry.memo = "destroy contract not success";
-            pretty_trx.is_completed = 1;
+            pretty_trx.is_completed = false;
         }
 
         pretty_trx.to_contract_ledger_entry = to_contract_ledger_entry;
@@ -2821,12 +2821,12 @@ PrettyContractTransaction		Wallet::to_pretty_contract_trx(const gdwcore::consens
         if (call_success)
         {
             //to_contract_ledger_entry.memo = "call contract success";
-            pretty_trx.is_completed = 0;
+            pretty_trx.is_completed = true;
         }
         else
         {
             //to_contract_ledger_entry.memo = "call contract not success";
-            pretty_trx.is_completed = 1;
+            pretty_trx.is_completed = false;
         }
 
         pretty_trx.to_contract_ledger_entry = to_contract_ledger_entry;
@@ -2904,12 +2904,12 @@ PrettyContractTransaction		Wallet::to_pretty_contract_trx(const gdwcore::consens
         if (transfer_success)
         {
             //to_contract_ledger_entry.memo = "transfer to contract success";
-            pretty_trx.is_completed = 0;
+            pretty_trx.is_completed = true;
         }
         else
         {
             //to_contract_ledger_entry.memo = "transfer to contract not success";
-            pretty_trx.is_completed = 1;
+            pretty_trx.is_completed = false;
         }
 
         pretty_trx.to_contract_ledger_entry = to_contract_ledger_entry;
