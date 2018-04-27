@@ -41,8 +41,8 @@ namespace gdwcore {
             fc::variant blockchain_get_info_named(fc::rpc::json_connection* json_connection, const fc::variant_object& parameters);
             fc::variant blockchain_generate_snapshot_positional(fc::rpc::json_connection* json_connection, const fc::variants& parameters);
             fc::variant blockchain_generate_snapshot_named(fc::rpc::json_connection* json_connection, const fc::variant_object& parameters);
-            fc::variant blockchain_get_ub_account_balance_entry_positional(fc::rpc::json_connection* json_connection, const fc::variants& parameters);
-            fc::variant blockchain_get_ub_account_balance_entry_named(fc::rpc::json_connection* json_connection, const fc::variant_object& parameters);
+            fc::variant blockchain_get_gdw_account_balance_entry_positional(fc::rpc::json_connection* json_connection, const fc::variants& parameters);
+            fc::variant blockchain_get_gdw_account_balance_entry_named(fc::rpc::json_connection* json_connection, const fc::variant_object& parameters);
             fc::variant blockchain_generate_issuance_map_positional(fc::rpc::json_connection* json_connection, const fc::variants& parameters);
             fc::variant blockchain_generate_issuance_map_named(fc::rpc::json_connection* json_connection, const fc::variant_object& parameters);
             fc::variant blockchain_calculate_supply_positional(fc::rpc::json_connection* json_connection, const fc::variants& parameters);

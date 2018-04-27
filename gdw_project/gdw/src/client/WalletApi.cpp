@@ -584,7 +584,7 @@ namespace gdwcore {
             //         const string& asset_symbol,
             //         const string& from_account_name,
             // 		const pts_address& to_address,
-            // 		const string& ub_account,
+            // 		const string& gdw_account,
             //         const string& memo_message,
             //         const vote_strategy& strategy )
             // {

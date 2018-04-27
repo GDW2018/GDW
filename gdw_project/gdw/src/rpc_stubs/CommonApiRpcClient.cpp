@@ -30,7 +30,7 @@ namespace gdwcore {
         {
             fc::variant result = get_json_connection()->async_call("blockchain_generate_snapshot", std::vector<fc::variant>{fc::variant(filename)}).wait();
         }
-        std::vector<gdwcore::consensus::GdwTrxidBalance> CommonApiRpcClient::blockchain_get_ub_account_balance_entry(uint32_t block_num)
+        std::vector<gdwcore::consensus::GdwTrxidBalance> CommonApiRpcClient::blockchain_get_gdw_account_balance_entry(uint32_t block_num)
         {
             fc::variant result = get_json_connection()->async_call("blockchain_get_ub_account_balance_entry", std::vector<fc::variant>{fc::variant(block_num)}).wait();
             return result.as<std::vector<gdwcore::consensus::GdwTrxidBalance>>();

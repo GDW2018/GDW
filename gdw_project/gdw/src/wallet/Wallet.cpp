@@ -1373,8 +1373,8 @@ namespace gdwcore {
                 if (gdw_account != "")
                 {
                     //trx.from_account = from_account_name;
-                    trx.ub_account = gdw_account;
-                    trx.ub_inport_asset = asset_to_transfer;
+                    trx.gdw_account = gdw_account;
+                    trx.gdw_inport_asset = asset_to_transfer;
                 }
                 // 	  if (memo_message != "")
                 // 	  {
@@ -4058,7 +4058,7 @@ namespace gdwcore {
             const string& memo_message,
             VoteStrategy strategy,
             bool sign,
-            const string& ub_account)
+            const string& gdw_account)
         {
             try {
                 FC_ASSERT(is_open(), "Wallet not open!");
@@ -4089,11 +4089,11 @@ namespace gdwcore {
 
                 SignedTransaction     trx;
                 unordered_set<Address> required_signatures;
-                if (ub_account != "")
+                if (gdw_account != "")
                 {
                     //trx.from_account = from_account_name;
-                    trx.ub_account = ub_account;
-                    trx.ub_inport_asset = asset_to_transfer;
+                    trx.gdw_account = gdw_account;
+                    trx.gdw_inport_asset = asset_to_transfer;
                 }
                 // 	  if (memo_message != "")
                 // 	  {

@@ -354,8 +354,8 @@ namespace gdwcore {
                 gdwcore::db::fast_level_map<SlateIdType, SlateEntry>                        _slate_id_to_entry;
 
                 gdwcore::db::fast_level_map<BalanceIdType, BalanceEntry>                    _balance_id_to_entry;
-                gdwcore::db::fast_level_map<string, set<GdwTrxidBalance>>							_ub_input_balance_entry;
-                gdwcore::db::fast_level_map<string, GdwBalanceEntry>						_ub_full_entry;
+                gdwcore::db::fast_level_map<string, set<GdwTrxidBalance>>							_gdw_input_balance_entry;
+                gdwcore::db::fast_level_map<string, GdwBalanceEntry>						_gdw_full_entry;
                 gdwcore::db::LevelMap<TransactionIdType, TransactionEntry>                 _transaction_id_to_entry;
                 set<UniqueTransactionKey>                                                 _unique_transactions;
                 gdwcore::db::LevelMap<Address, unordered_set<TransactionIdType>>             _address_to_transaction_ids;

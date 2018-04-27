@@ -82,14 +82,14 @@ namespace gdwcore {
                 }
                 return delegates;
             }
-            vector<GdwTrxidBalance> ClientImpl::blockchain_get_ub_account_balance_entry(const uint32_t block_num)
+            vector<GdwTrxidBalance> ClientImpl::blockchain_get_gdw_account_balance_entry(const uint32_t block_num)
             {
                 // set limit in  simulator state
                 if (_chain_db->get_is_in_simulator())
                     FC_THROW_EXCEPTION(simulator_command_forbidden, "in simulator, this command is forbidden, you cannot call it!");
 
                 uint32_t last_scan_num = _wallet->get_last_scanned_block_number_for_ub();
-                auto results = _chain_db->fetch_ub_full_entry(block_num, last_scan_num);
+                auto results = _chain_db->fetch_gdw_full_entry(block_num, last_scan_num);
                 _wallet->start_scan(block_num, -1);
                 return results;
 

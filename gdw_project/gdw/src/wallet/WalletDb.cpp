@@ -143,11 +143,11 @@ namespace gdwcore {
                         self->keys[key_address] = key_entry;
 
                         // Cache address map
-                        self->btc_to_ub_address[key_address] = key_address;
-                        self->btc_to_ub_address[Address(PtsAddress(key_entry.public_key, false, 0))] = key_address; // Uncompressed BTC
-                        self->btc_to_ub_address[Address(PtsAddress(key_entry.public_key, true, 0))] = key_address; // Compressed BTC
-                        self->btc_to_ub_address[Address(PtsAddress(key_entry.public_key, false, 56))] = key_address; // Uncompressed PTS
-                        self->btc_to_ub_address[Address(PtsAddress(key_entry.public_key, true, 56))] = key_address; // Compressed PTS
+                        self->btc_to_gdw_address[key_address] = key_address;
+                        self->btc_to_gdw_address[Address(PtsAddress(key_entry.public_key, false, 0))] = key_address; // Uncompressed BTC
+                        self->btc_to_gdw_address[Address(PtsAddress(key_entry.public_key, true, 0))] = key_address; // Compressed BTC
+                        self->btc_to_gdw_address[Address(PtsAddress(key_entry.public_key, false, 56))] = key_address; // Uncompressed PTS
+                        self->btc_to_gdw_address[Address(PtsAddress(key_entry.public_key, true, 56))] = key_address; // Compressed PTS
                     } FC_CAPTURE_AND_RETHROW((key_entry))
                 }
 
@@ -249,7 +249,7 @@ namespace gdwcore {
             account_id_to_wallet_entry_index.clear();
 
             keys.clear();
-            btc_to_ub_address.clear();
+            btc_to_gdw_address.clear();
 
             transactions.clear();
             id_to_transaction_entry_index.clear();
@@ -473,24 +473,24 @@ namespace gdwcore {
                 address_to_account_wallet_entry_index.erase(Address(accRec->owner_key));
                 name_to_account_wallet_entry_index.erase(accRec->name);
                 account_id_to_wallet_entry_index.erase(accRec->id);
-                btc_to_ub_address.erase(accRec->owner_address());
-                btc_to_ub_address.erase(Address(PtsAddress(accRec->owner_key, false, 0)));
-                btc_to_ub_address.erase(Address(PtsAddress(accRec->owner_key, true, 0)));
-                btc_to_ub_address.erase(Address(PtsAddress(accRec->owner_key, false, 56)));
-                btc_to_ub_address.erase(Address(PtsAddress(accRec->owner_key, true, 56)));
+                btc_to_gdw_address.erase(accRec->owner_address());
+                btc_to_gdw_address.erase(Address(PtsAddress(accRec->owner_key, false, 0)));
+                btc_to_gdw_address.erase(Address(PtsAddress(accRec->owner_key, true, 0)));
+                btc_to_gdw_address.erase(Address(PtsAddress(accRec->owner_key, false, 56)));
+                btc_to_gdw_address.erase(Address(PtsAddress(accRec->owner_key, true, 56)));
                 if (accRec->is_delegate())
                 {
-                    btc_to_ub_address.erase(accRec->signing_address());
-                    btc_to_ub_address.erase(Address(PtsAddress(accRec->signing_key(), false, 0)));
-                    btc_to_ub_address.erase(Address(PtsAddress(accRec->signing_key(), true, 0)));
-                    btc_to_ub_address.erase(Address(PtsAddress(accRec->signing_key(), false, 56)));
-                    btc_to_ub_address.erase(Address(PtsAddress(accRec->signing_key(), true, 56)));
+                    btc_to_gdw_address.erase(accRec->signing_address());
+                    btc_to_gdw_address.erase(Address(PtsAddress(accRec->signing_key(), false, 0)));
+                    btc_to_gdw_address.erase(Address(PtsAddress(accRec->signing_key(), true, 0)));
+                    btc_to_gdw_address.erase(Address(PtsAddress(accRec->signing_key(), false, 56)));
+                    btc_to_gdw_address.erase(Address(PtsAddress(accRec->signing_key(), true, 56)));
                 }
-                btc_to_ub_address.erase(Address(accRec->active_key()));
-                btc_to_ub_address.erase(Address(PtsAddress(accRec->active_key(), false, 0)));
-                btc_to_ub_address.erase(Address(PtsAddress(accRec->active_key(), true, 0)));
-                btc_to_ub_address.erase(Address(PtsAddress(accRec->active_key(), false, 56)));
-                btc_to_ub_address.erase(Address(PtsAddress(accRec->active_key(), true, 56)));
+                btc_to_gdw_address.erase(Address(accRec->active_key()));
+                btc_to_gdw_address.erase(Address(PtsAddress(accRec->active_key(), false, 0)));
+                btc_to_gdw_address.erase(Address(PtsAddress(accRec->active_key(), true, 0)));
+                btc_to_gdw_address.erase(Address(PtsAddress(accRec->active_key(), false, 56)));
+                btc_to_gdw_address.erase(Address(PtsAddress(accRec->active_key(), true, 56)));
 
 
                 //从db中将key删除,如果不删除,scan_accounts时会将与key相关的账号存入钱包
@@ -850,8 +850,8 @@ namespace gdwcore {
         {
             try {
                 FC_ASSERT(is_open(), "Wallet not open!");
-                const auto address_map_iter = btc_to_ub_address.find(derived_address);
-                if (address_map_iter != btc_to_ub_address.end())
+                const auto address_map_iter = btc_to_gdw_address.find(derived_address);
+                if (address_map_iter != btc_to_gdw_address.end())
                 {
                     const Address& key_address = address_map_iter->second;
                     const auto entry_iter = keys.find(key_address);
@@ -1212,11 +1212,11 @@ namespace gdwcore {
                                 {
                                     const Address key_address = key_entry.get_address();
                                     keys.erase(key_address);
-                                    btc_to_ub_address.erase(key_address);
-                                    btc_to_ub_address.erase(Address(PtsAddress(key_entry.public_key, false, 0)));
-                                    btc_to_ub_address.erase(Address(PtsAddress(key_entry.public_key, true, 0)));
-                                    btc_to_ub_address.erase(Address(PtsAddress(key_entry.public_key, false, 56)));
-                                    btc_to_ub_address.erase(Address(PtsAddress(key_entry.public_key, true, 56)));
+                                    btc_to_gdw_address.erase(key_address);
+                                    btc_to_gdw_address.erase(Address(PtsAddress(key_entry.public_key, false, 0)));
+                                    btc_to_gdw_address.erase(Address(PtsAddress(key_entry.public_key, true, 0)));
+                                    btc_to_gdw_address.erase(Address(PtsAddress(key_entry.public_key, false, 56)));
+                                    btc_to_gdw_address.erase(Address(PtsAddress(key_entry.public_key, true, 56)));
 
                                     key_entry.public_key = public_key;
                                     my->load_key_entry(key_entry);

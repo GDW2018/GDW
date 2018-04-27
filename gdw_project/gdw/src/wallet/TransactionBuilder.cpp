@@ -184,7 +184,7 @@ TransactionBuilder& TransactionBuilder::deposit_asset(const gdwcore::wallet::Wal
     const Asset& amount,
     const string& memo,
     fc::optional<string> memo_sender,
-    const string& ub_account)
+    const string& gdw_account)
 {
     try {
         if (recipient.is_retracted())
@@ -206,11 +206,11 @@ TransactionBuilder& TransactionBuilder::deposit_asset(const gdwcore::wallet::Wal
         if (!_wimpl->_wallet_db.has_private_key(memo_key))
             memo_key = memo_account->active_key();
         FC_ASSERT(_wimpl->_wallet_db.has_private_key(memo_key));
-        if (ub_account != "")
+        if (gdw_account != "")
         {
             //trx.from_account = (*memo_sender);
-            trx.ub_account = ub_account;
-            trx.ub_inport_asset = amount;
+            trx.gdw_account = gdw_account;
+            trx.gdw_inport_asset = amount;
         }
         optional<PublicKeyType> titan_one_time_key;
         auto one_time_key = _wimpl->get_new_private_key(payer.name);
@@ -325,7 +325,7 @@ TransactionBuilder& TransactionBuilder::deposit_asset_with_escrow(const gdwcore:
     const Asset& amount,
     const string& memo,
     fc::optional<PublicKeyType> memo_sender,
-    const string& ub_account)
+    const string& gdw_account)
 {
     try {
         if (recipient.is_retracted())
@@ -345,10 +345,10 @@ TransactionBuilder& TransactionBuilder::deposit_asset_with_escrow(const gdwcore:
             memo_sender = payer.active_key();
 
         optional<PublicKeyType> titan_one_time_key;
-        if (ub_account != "")
+        if (gdw_account != "")
         {
-            trx.ub_account = ub_account;
-            trx.ub_inport_asset = amount;
+            trx.gdw_account = gdw_account;
+            trx.gdw_inport_asset = amount;
         }
         if (!recipient.is_titan_account())
         {

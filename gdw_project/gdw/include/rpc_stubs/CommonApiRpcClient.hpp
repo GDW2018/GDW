@@ -29,7 +29,7 @@ namespace gdwcore {
 
             fc::variant_object blockchain_get_info() const override;
             void blockchain_generate_snapshot(const std::string& filename) const override;
-            std::vector<gdwcore::consensus::GdwTrxidBalance> blockchain_get_ub_account_balance_entry(uint32_t block_num) override;
+            std::vector<gdwcore::consensus::GdwTrxidBalance> blockchain_get_gdw_account_balance_entry(uint32_t block_num) override;
             void blockchain_generate_issuance_map(const std::string& symbol, const std::string& filename) const override;
             gdwcore::consensus::Asset blockchain_calculate_supply(const std::string& asset) const override;
             bool blockchain_is_synced() const override;

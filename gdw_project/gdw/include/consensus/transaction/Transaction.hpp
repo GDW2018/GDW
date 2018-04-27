@@ -42,9 +42,9 @@ namespace gdwcore {
         {
             fc::time_point_sec    expiration;
             optional<uint64_t>    reserved;
-            string ub_account;
+            string gdw_account;
             //string from_account;
-            Asset ub_inport_asset;
+            Asset gdw_inport_asset;
             vector<Operation>     operations;
             fc::enum_type<uint8_t, ResultTransactionType>    result_trx_type = ResultTransactionType::origin_transaction;    
             TransactionIdType     result_trx_id = TransactionIdType();
@@ -175,15 +175,15 @@ namespace gdwcore {
         struct GdwTrxidBalance
         {
             GdwTrxidBalance(){};
-            GdwTrxidBalance(string ub_account, TransactionIdType trx_id, Asset asset_trx, uint32_t
+            GdwTrxidBalance(string gdw_account, TransactionIdType trx_id, Asset asset_trx, uint32_t
                 block_num, string from_account, fc::time_point_sec create_time) :
-                ub_account(ub_account),
+                gdw_account(gdw_account),
                 trx_id(trx_id),
                 asset_trx(asset_trx),
                 block_num(block_num),
                 from_account(from_account),
                 create_time(create_time){};
-            string ub_account;
+            string gdw_account;
             uint32_t block_num;
             TransactionIdType trx_id;
             Asset asset_trx;
@@ -204,8 +204,8 @@ namespace gdwcore {
         };
         struct GdwBalanceEntry
         {
-            std::set<TransactionIdType> ub_trxid_sort;
-            std::multimap<uint32_t, GdwTrxidBalance> ub_block_sort;
+            std::set<TransactionIdType> gdw_trxid_sort;
+            std::multimap<uint32_t, GdwTrxidBalance> gdw_block_sort;
         };
         struct TransactionLocation
         {
@@ -240,8 +240,8 @@ FC_REFLECT_ENUM(gdwcore::consensus::TransactionType,
     (incomplete_result_transaction)
     )
 
-    FC_REFLECT(gdwcore::consensus::GdwTrxidBalance, (ub_account)(trx_id)(asset_trx)(block_num)(from_account)(create_time))
-    FC_REFLECT(gdwcore::consensus::GdwBalanceEntry, (ub_trxid_sort)(ub_block_sort))
-    FC_REFLECT(gdwcore::consensus::Transaction, (expiration)(reserved)(ub_account)(ub_inport_asset)(operations)(result_trx_type)(result_trx_id))
+    FC_REFLECT(gdwcore::consensus::GdwTrxidBalance, (gdw_account)(trx_id)(asset_trx)(block_num)(from_account)(create_time))
+    FC_REFLECT(gdwcore::consensus::GdwBalanceEntry, (gdw_trxid_sort)(gdw_block_sort))
+    FC_REFLECT(gdwcore::consensus::Transaction, (expiration)(reserved)(gdw_account)(gdw_inport_asset)(operations)(result_trx_type)(result_trx_id))
     FC_REFLECT_DERIVED(gdwcore::consensus::SignedTransaction, (gdwcore::consensus::Transaction), (signatures))
     FC_REFLECT(gdwcore::consensus::TransactionLocation, (block_num)(trx_num))

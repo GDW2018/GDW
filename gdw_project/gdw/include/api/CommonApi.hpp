@@ -65,9 +65,9 @@ namespace gdwcore {
              *
              * @param block_num (uint32_t, required)
              *
-             * @return vector<ub_trxid_balance>
+             * @return vector<gdw_trxid_balance>
              */
-            virtual std::vector<gdwcore::consensus::GdwTrxidBalance> blockchain_get_ub_account_balance_entry(uint32_t block_num) = 0;
+            virtual std::vector<gdwcore::consensus::GdwTrxidBalance> blockchain_get_gdw_account_balance_entry(uint32_t block_num) = 0;
             /**
              * A utility to help verify UIA distribution. Returns a snapshot map of all issuances for a particular UIA.
              *

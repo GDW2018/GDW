@@ -114,7 +114,7 @@ namespace gdwcore {
 
             optional<string>    growl_notify_endpoint;
             optional<string>    growl_password;
-            optional<string>    growl_ub_client_identifier;
+            optional<string>    growl_gdw_client_identifier;
 
         };
 
@@ -232,7 +232,7 @@ FC_REFLECT(gdwcore::client::Config,
 (faucet_account_name)
 (growl_notify_endpoint)
 (growl_password)
-(growl_ub_client_identifier)
+(growl_gdw_client_identifier)
 (rpc)
 )
 

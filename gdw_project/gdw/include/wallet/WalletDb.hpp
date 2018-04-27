@@ -142,7 +142,7 @@ namespace gdwcore {
             unordered_map<AccountIdType, int32_t>                        account_id_to_wallet_entry_index;
 
             // Cache to lookup keys
-            unordered_map<Address, Address>                                btc_to_ub_address;
+            unordered_map<Address, Address>                                btc_to_gdw_address;
 
             // Cache to lookup accounts and contacts
             unordered_map<string, string>                                  label_to_account_or_contact;

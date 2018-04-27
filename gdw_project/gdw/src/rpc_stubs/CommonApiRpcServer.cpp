@@ -90,7 +90,7 @@ namespace gdwcore {
 			return fc::variant();
 		}
 
-		fc::variant CommonApiRpcServer::blockchain_get_ub_account_balance_entry_positional(fc::rpc::json_connection* json_connection, const fc::variants& parameters)
+		fc::variant CommonApiRpcServer::blockchain_get_gdw_account_balance_entry_positional(fc::rpc::json_connection* json_connection, const fc::variants& parameters)
 		{
 			// this method has no prerequisites
 
@@ -98,11 +98,11 @@ namespace gdwcore {
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 1 (block_num)");
 			uint32_t block_num = parameters[0].as<uint32_t>();
 
-			std::vector<gdwcore::consensus::GdwTrxidBalance> result = get_client()->blockchain_get_ub_account_balance_entry(block_num);
+			std::vector<gdwcore::consensus::GdwTrxidBalance> result = get_client()->blockchain_get_gdw_account_balance_entry(block_num);
 			return fc::variant(result);
 		}
 
-		fc::variant CommonApiRpcServer::blockchain_get_ub_account_balance_entry_named(fc::rpc::json_connection* json_connection, const fc::variant_object& parameters)
+		fc::variant CommonApiRpcServer::blockchain_get_gdw_account_balance_entry_named(fc::rpc::json_connection* json_connection, const fc::variant_object& parameters)
 		{
 			// this method has no prerequisites
 
@@ -110,7 +110,7 @@ namespace gdwcore {
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'block_num'");
 			uint32_t block_num = parameters["block_num"].as<uint32_t>();
 
-			std::vector<gdwcore::consensus::GdwTrxidBalance> result = get_client()->blockchain_get_ub_account_balance_entry(block_num);
+			std::vector<gdwcore::consensus::GdwTrxidBalance> result = get_client()->blockchain_get_gdw_account_balance_entry(block_num);
 			return fc::variant(result);
 		}
 
@@ -8263,13 +8263,13 @@ namespace gdwcore {
 				this, capture_con, _1);
 			json_connection->add_named_param_method("blockchain_generate_snapshot", bound_named_method);
 
-			// register method blockchain_get_ub_account_balance_entry
-			bound_positional_method = boost::bind(&CommonApiRpcServer::blockchain_get_ub_account_balance_entry_positional,
+			// register method blockchain_get_gdw_account_balance_entry
+			bound_positional_method = boost::bind(&CommonApiRpcServer::blockchain_get_gdw_account_balance_entry_positional,
 				this, capture_con, _1);
-			json_connection->add_method("blockchain_get_ub_account_balance_entry", bound_positional_method);
-            bound_named_method = boost::bind(&CommonApiRpcServer::blockchain_get_ub_account_balance_entry_named, 
+			json_connection->add_method("blockchain_get_gdw_account_balance_entry", bound_positional_method);
+            bound_named_method = boost::bind(&CommonApiRpcServer::blockchain_get_gdw_account_balance_entry_named, 
                 this, capture_con, _1);
-            json_connection->add_named_param_method("blockchain_get_ub_account_balance_entry", bound_named_method);
+            json_connection->add_named_param_method("blockchain_get_gdw_account_balance_entry", bound_named_method);
 
            // register method blockchain_generate_issuance_map
 			bound_positional_method = boost::bind(&CommonApiRpcServer::blockchain_generate_issuance_map_positional,
@@ -10471,17 +10471,17 @@ namespace gdwcore {
             }
 
             {
-                // register method blockchain_get_ub_account_balance_entry
-                gdwcore::api::MethodData blockchain_get_ub_account_balance_entry_method_metadata{ "blockchain_get_ub_account_balance_entry", nullptr,
+                // register method blockchain_get_gdw_account_balance_entry
+                gdwcore::api::MethodData blockchain_get_gdw_account_balance_entry_method_metadata{ "blockchain_get_gdw_account_balance_entry", nullptr,
                     /* description */ "fetch all GdwTrxidBalance from block where blocknum of the block lower than block_num or equal to block_num.",
-                    /* returns */ "vector<ub_trxid_balance>",
+                    /* returns */ "vector<gdw_trxid_balance>",
                     /* params: */{
                         {"block_num", "uint32_t", gdwcore::api::required_positional, fc::ovariant()}
                           },
                     /* prerequisites */ (gdwcore::api::MethodPrerequisites) 0,
                     /* detailed description */ "fetch all GdwTrxidBalance from block where blocknum of the block lower than block_num or equal to block_num.\n\nParameters:\n  block_num (uint32_t, required): \n\nReturns:\n  vector<ub_trxid_balance>\n",
                     /* aliases */ {}, false};
-                store_method_metadata(blockchain_get_ub_account_balance_entry_method_metadata);
+                store_method_metadata(blockchain_get_gdw_account_balance_entry_method_metadata);
             }
 
             {
@@ -14020,8 +14020,8 @@ namespace gdwcore {
                 return blockchain_get_info_positional(nullptr, parameters);
             if (method_name == "blockchain_generate_snapshot")
                 return blockchain_generate_snapshot_positional(nullptr, parameters);
-            if (method_name == "blockchain_get_ub_account_balance_entry")
-                return blockchain_get_ub_account_balance_entry_positional(nullptr, parameters);
+            if (method_name == "blockchain_get_gdw_account_balance_entry")
+                return blockchain_get_gdw_account_balance_entry_positional(nullptr, parameters);
             if (method_name == "blockchain_generate_issuance_map")
                 return blockchain_generate_issuance_map_positional(nullptr, parameters);
             if (method_name == "blockchain_calculate_supply")

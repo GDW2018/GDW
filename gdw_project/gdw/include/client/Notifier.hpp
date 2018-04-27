@@ -14,7 +14,7 @@ namespace gdwcore {
         class GdwGntpNotifier {
         public:
             GdwGntpNotifier(const std::string& host_to_notify = "127.0.0.1", uint16_t port = 23053,
-                const std::string& ub_instance_identifier = "Gdw",
+                const std::string& gdw_instance_identifier = "Gdw",
                 const fc::optional<std::string>& password = fc::optional<std::string>());
             ~GdwGntpNotifier();
 

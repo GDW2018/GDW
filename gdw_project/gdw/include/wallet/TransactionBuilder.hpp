@@ -179,7 +179,7 @@ namespace gdwcore {
                 const Asset& amount,
                 const string& memo,
                 fc::optional<string> memo_sender = fc::optional<string>(),
-                const string& ub_account = "");
+                const string& gdw_account = "");
 
             /**
              * @brief Transfer funds from payer to a raw address
@@ -204,7 +204,7 @@ namespace gdwcore {
                 const Asset& amount,
                 const string& memo,
                 fc::optional<PublicKeyType> memo_sender = fc::optional<PublicKeyType>(),
-                const string& ub_account = "");
+                const string& gdw_account = "");
 
             TransactionBuilder& release_escrow(const AccountEntry& payer,
                 const Address& escrow_account,

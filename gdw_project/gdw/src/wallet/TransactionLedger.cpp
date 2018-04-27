@@ -334,26 +334,26 @@ WalletTransactionEntry WalletImpl::scan_transaction(
         }
         else
         {
-            if (store_entry && transaction.ub_account != "")
+            if (store_entry && transaction.gdw_account != "")
             {
-                GdwTrxidBalance ub_entry;
+                GdwTrxidBalance gdw_entry;
                 const auto pretty_trx = self->to_pretty_trx(*transaction_entry);
                 for (const auto item : pretty_trx.ledger_entries)
                 {
                     if (item.from_account != "")
                     {
-                        ub_entry.from_account = item.from_account;
+                        gdw_entry.from_account = item.from_account;
                         break;
                     }
                 }
                 string strToAccount;
                 string strSubAccount;
-                self->accountsplit(transaction.ub_account, strToAccount, strSubAccount);
+                self->accountsplit(transaction.gdw_account, strToAccount, strSubAccount);
                 auto blockchain_trx = _blockchain->get_transaction(transaction_id);
                 bool bDiffDeop = false;
                 if (blockchain_trx.valid())
                 {
-                    ShareType ub_amount = 0;
+                    ShareType gdw_amount = 0;
                     string preowner;
                     int iLoop = 0;
                     for (const auto& op : blockchain_trx->trx.operations)
@@ -365,17 +365,17 @@ WalletTransactionEntry WalletImpl::scan_transaction(
                             if (0 == iLoop)
                             {
                                 preowner = string(*(deop.condition.owner()));
-                                ub_amount += deop.amount;
+                                gdw_amount += deop.amount;
                             }
                             else
                             {
                                 if (preowner == string(*(deop.condition.owner())))
                                 {
-                                    ub_amount += deop.amount;
+                                    gdw_amount += deop.amount;
                                 }
                                 else
                                 {
-                                    ub_amount = 0;
+                                    gdw_amount = 0;
                                     bDiffDeop = true;
                                 }
                             }
@@ -387,19 +387,19 @@ WalletTransactionEntry WalletImpl::scan_transaction(
                             break;
                         }
                     }
-                //ub_entry.from_account = transaction.from_account;
-                ub_entry.create_time = transaction_entry->created_time;
-                ub_entry.ub_account = transaction.ub_account;
-                ub_entry.block_num = transaction_entry->block_num;
-                transaction_entry->trx.ub_account = transaction.ub_account;
-                transaction_entry->trx.ub_inport_asset = transaction.ub_inport_asset;
-                ub_entry.trx_id = transaction.id();
-                    //ub_entry.asset_trx = transaction.ub_inport_asset;
-                    ub_entry.asset_trx = Asset(ub_amount, 0);
+                //gdw_entry.from_account = transaction.from_account;
+                gdw_entry.create_time = transaction_entry->created_time;
+                gdw_entry.gdw_account = transaction.gdw_account;
+                gdw_entry.block_num = transaction_entry->block_num;
+                transaction_entry->trx.gdw_account = transaction.gdw_account;
+                transaction_entry->trx.gdw_inport_asset = transaction.gdw_inport_asset;
+                gdw_entry.trx_id = transaction.id();
+                    //gdw_entry.asset_trx = transaction.gdw_inport_asset;
+                    gdw_entry.asset_trx = Asset(gdw_amount, 0);
                     {
                         writelock wlock(m_mutex_for_ub);
-                _blockchain->transaction_insert_to_ub_full_entry(strToAccount, ub_entry);
-                //_blockchain->transaction_insert_to_ub_balance(ub_entry.ub_account, ub_entry);
+                _blockchain->transaction_insert_to_gdw_full_entry(strToAccount, gdw_entry);
+                //_blockchain->transaction_insert_to_gdw_balance(gdw_entry.gdw_account, gdw_entry);
                     }
                 }
             }

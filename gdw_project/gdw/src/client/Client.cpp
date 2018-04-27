@@ -184,7 +184,7 @@ namespace gdwcore {
 
                 ("growl", program_options::value<std::string>()->implicit_value("127.0.0.1"), "Send notifications about potential problems to Growl")
                 ("growl-password", program_options::value<std::string>(), "Password for authenticating to a Growl server")
-                ("growl-identifier", program_options::value<std::string>(), "A name displayed in growl messages to identify this ub_client instance")
+                ("growl-identifier", program_options::value<std::string>(), "A name displayed in growl messages to identify this gdw_client instance")
                 ;
 
             program_options::variables_map option_variables;
@@ -1652,8 +1652,8 @@ namespace gdwcore {
             info["blockchain_name"] = GDW_BLOCKCHAIN_NAME;
             info["blockchain_description"] = GDW_BLOCKCHAIN_DESCRIPTION;
             info["client_version"] = client_version;
-            info["ub_revision"] = gdwcore::utilities::git_revision_sha;
-            info["ub_revision_age"] = fc::get_approximate_relative_time_string(fc::time_point_sec(gdwcore::utilities::git_revision_unix_timestamp));
+            info["gdw_revision"] = gdwcore::utilities::git_revision_sha;
+            info["gdw_revision_age"] = fc::get_approximate_relative_time_string(fc::time_point_sec(gdwcore::utilities::git_revision_unix_timestamp));
             info["fc_revision"] = fc::git_revision_sha;
             info["fc_revision_age"] = fc::get_approximate_relative_time_string(fc::time_point_sec(fc::git_revision_unix_timestamp));
             info["compile_date"] = "compiled on " __DATE__ " at " __TIME__;
@@ -1911,12 +1911,12 @@ namespace gdwcore {
                 else
                     growl_password = my->_config.growl_password;
 
-                std::string ub_instance_identifier = "Gdw";
+                std::string gdw_instance_identifier = "Gdw";
                 if (option_variables.count("growl-identifier"))
-                    ub_instance_identifier = option_variables["growl-identifier"].as<std::string>();
-                else if (my->_config.growl_ub_client_identifier)
-                    ub_instance_identifier = *my->_config.growl_ub_client_identifier;
-                my->_notifier = std::make_shared<GdwGntpNotifier>(host_to_notify, port_to_notify, ub_instance_identifier, growl_password);
+                    gdw_instance_identifier = option_variables["growl-identifier"].as<std::string>();
+                else if (my->_config.growl_gdw_client_identifier)
+                    gdw_instance_identifier = *my->_config.growl_gdw_client_identifier;
+                my->_notifier = std::make_shared<GdwGntpNotifier>(host_to_notify, port_to_notify, gdw_instance_identifier, growl_password);
                 my->_blocks_too_old_monitor_done = fc::schedule([=]() { my->blocks_too_old_monitor_task(); },
                     fc::time_point::now() + fc::seconds(GDW_BLOCKCHAIN_BLOCK_INTERVAL_SEC),
                     "block_monitor_task");

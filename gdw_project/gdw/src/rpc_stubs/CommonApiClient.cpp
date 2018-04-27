@@ -64,29 +64,29 @@ namespace gdwcore {
             FC_RETHROW_EXCEPTIONS(warn, "")
         }
 
-        std::vector<gdwcore::consensus::GdwTrxidBalance> CommonApiClient::blockchain_get_ub_account_balance_entry(uint32_t block_num)
+        std::vector<gdwcore::consensus::GdwTrxidBalance> CommonApiClient::blockchain_get_gdw_account_balance_entry(uint32_t block_num)
         {
-            ilog("received RPC call: blockchain_get_ub_account_balance_entry(${block_num})", ("block_num", block_num));
+            ilog("received RPC call: blockchain_get_gdw_account_balance_entry(${block_num})", ("block_num", block_num));
             gdwcore::api::GlobalApiLogger* glog = gdwcore::api::GlobalApiLogger::get_instance();
             uint64_t call_id = 0;
             fc::variants args;
             if( glog != NULL )
             {
                 args.push_back( fc::variant(block_num) );
-                call_id = glog->log_call_started( this, "blockchain_get_ub_account_balance_entry", args );
+                call_id = glog->log_call_started( this, "blockchain_get_gdw_account_balance_entry", args );
             }
 
             struct scope_exit
             {
                 fc::time_point start_time;
                 scope_exit() : start_time(fc::time_point::now()) {}
-                ~scope_exit() { dlog("RPC call blockchain_get_ub_account_balance_entry finished in ${time} ms", ("time", (fc::time_point::now() - start_time).count() / 1000)); }
+                ~scope_exit() { dlog("RPC call blockchain_get_gdw_account_balance_entry finished in ${time} ms", ("time", (fc::time_point::now() - start_time).count() / 1000)); }
             } execution_time_logger;
             try
             {
-                std::vector<gdwcore::consensus::GdwTrxidBalance> result =             get_impl()->blockchain_get_ub_account_balance_entry(block_num);
+                std::vector<gdwcore::consensus::GdwTrxidBalance> result =             get_impl()->blockchain_get_gdw_account_balance_entry(block_num);
                 if( call_id != 0 )
-                    glog->log_call_finished( call_id, this, "blockchain_get_ub_account_balance_entry", args, fc::variant(result) );
+                    glog->log_call_finished( call_id, this, "blockchain_get_gdw_account_balance_entry", args, fc::variant(result) );
 
                 return result;
             }

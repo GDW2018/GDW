@@ -337,30 +337,30 @@ namespace gdwcore {
             *
             * @return vector<GdwTrxidBalance>
             */
-            vector<GdwTrxidBalance> fetch_ub_input_balance(const uint32_t &  block_num);
+            vector<GdwTrxidBalance> fetch_gdw_input_balance(const uint32_t &  block_num);
 
-            /**  Insert the GDW transaction balance to db _ub_input_balance_entry
+            /**  Insert the GDW transaction balance to db _gdw_input_balance_entry
             *
-            * @param  ub_account  string
-            * @param  ub_balance_entry  GdwTrxidBalance
+            * @param  gdw_account  string
+            * @param  gdw_balance_entry  GdwTrxidBalance
             *
             * @return void
             */
-            void transaction_insert_to_ub_balance(const string & ub_account, const GdwTrxidBalance & ub_balance_entry);
+            void transaction_insert_to_gdw_balance(const string & gdw_account, const GdwTrxidBalance & gdw_balance_entry);
 
-            /** Erase the GDW transaction balance from db _ub_input_balance_entry
+            /** Erase the GDW transaction balance from db _gdw_input_balance_entry
             *
-            * @param  ub_account  string
-            * @param  ub_balance_entry  GdwTrxidBalance
+            * @param  gdw_account  string
+            * @param  gdw_balance_entry  GdwTrxidBalance
             *
             * @return void
             */
-            void transaction_erase_from_ub_balance(const string & ub_account, const GdwTrxidBalance & ub_balance_entry);
-            vector<GdwTrxidBalance> fetch_ub_full_entry(const uint32_t& block_num, const uint32_t& last_scan_block_num);
+            void transaction_erase_from_gdw_balance(const string & gdw_account, const GdwTrxidBalance & gdw_balance_entry);
+            vector<GdwTrxidBalance> fetch_gdw_full_entry(const uint32_t& block_num, const uint32_t& last_scan_block_num);
             //Must handle account before you use this function
-            void transaction_insert_to_ub_full_entry(const string& ub_accout, const GdwTrxidBalance& ub_balance_entry);
+            void transaction_insert_to_gdw_full_entry(const string& gdw_accout, const GdwTrxidBalance& gdw_balance_entry);
             //Must handle account before you use this function
-            void transaction_erase_from_ub_full_entry(const string& ub_accout, const GdwTrxidBalance& ub_balance_entry);
+            void transaction_erase_from_gdw_full_entry(const string& gdw_accout, const GdwTrxidBalance& gdw_balance_entry);
 
 
             /**  Find block num by time (use the method of bisection)

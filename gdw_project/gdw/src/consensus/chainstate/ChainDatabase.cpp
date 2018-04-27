@@ -175,8 +175,8 @@ namespace gdwcore {
 
                     _transaction_id_to_entry.open(data_dir / "index/transaction_id_to_entry");
                     _address_to_transaction_ids.open(data_dir / "index/address_to_transaction_ids");
-                    _ub_input_balance_entry.open(data_dir / "index/_ub_input_balance_entry");
-                    _ub_full_entry.open(data_dir / "index/_ub_full_entry");
+                    _gdw_input_balance_entry.open(data_dir / "index/_gdw_input_balance_entry");
+                    _gdw_full_entry.open(data_dir / "index/_gdw_full_entry");
 
                     _block_extend_status.open(data_dir / "index/_block_extend_status");
 
@@ -311,14 +311,14 @@ namespace gdwcore {
                     // For loading balances originally snapshotted from other chains
                     const auto convert_raw_address = [](const string& raw_address) -> Address
                     {
-                        //static const vector<string> ub_prefixes{ "GDW" };
+                        //static const vector<string> gdw_prefixes{ "GDW" };
                         try
                         {
                             return Address(raw_address);
                         }
                         catch (const fc::exception&)
                         {
-                            //for( const string& prefix : ub_prefixes )
+                            //for( const string& prefix : gdw_prefixes )
                             //{
                             // if( raw_address.find( prefix ) == 0 )
                             //  {
@@ -1655,8 +1655,8 @@ namespace gdwcore {
 
                 my->_transaction_id_to_entry.close();
                 my->_address_to_transaction_ids.close();
-                my->_ub_input_balance_entry.close();
-                my->_ub_full_entry.close();
+                my->_gdw_input_balance_entry.close();
+                my->_gdw_full_entry.close();
                 my->_block_extend_status.close();
 
                 my->_slot_index_to_entry.close();
@@ -3119,12 +3119,12 @@ namespace gdwcore {
 
 
 
-        vector<GdwTrxidBalance> ChainDatabase::fetch_ub_input_balance(const uint32_t & block_num)
+        vector<GdwTrxidBalance> ChainDatabase::fetch_gdw_input_balance(const uint32_t & block_num)
         {
             try{
                 vector < GdwTrxidBalance > results;
-                for (auto iter = my->_ub_input_balance_entry.unordered_begin();
-                    iter != my->_ub_input_balance_entry.unordered_end(); ++iter)
+                for (auto iter = my->_gdw_input_balance_entry.unordered_begin();
+                    iter != my->_gdw_input_balance_entry.unordered_end(); ++iter)
                 {
                     GdwTrxidBalance ubTemp;
                     ubTemp.block_num = block_num + 1;
@@ -3137,7 +3137,7 @@ namespace gdwcore {
                 return results;
             } FC_CAPTURE_AND_RETHROW((block_num))
         }
-        vector<GdwTrxidBalance> ChainDatabase::fetch_ub_full_entry(const uint32_t& block_num, const uint32_t & last_scan_block_num)
+        vector<GdwTrxidBalance> ChainDatabase::fetch_gdw_full_entry(const uint32_t& block_num, const uint32_t & last_scan_block_num)
         {
             try{
                 vector < GdwTrxidBalance > results;
@@ -3145,11 +3145,11 @@ namespace gdwcore {
                 {
                     return results;
                 }
-                for (auto iter = my->_ub_full_entry.unordered_begin();
-                    iter != my->_ub_full_entry.unordered_end(); ++iter)
+                for (auto iter = my->_gdw_full_entry.unordered_begin();
+                    iter != my->_gdw_full_entry.unordered_end(); ++iter)
                 {
-                    auto block_iter = iter->second.ub_block_sort.lower_bound(block_num + 1);
-                    for (; block_iter != iter->second.ub_block_sort.end(); block_iter++)
+                    auto block_iter = iter->second.gdw_block_sort.lower_bound(block_num + 1);
+                    for (; block_iter != iter->second.gdw_block_sort.end(); block_iter++)
                     {
                         if (block_iter->second.block_num <= last_scan_block_num)
                         {
@@ -3160,80 +3160,80 @@ namespace gdwcore {
                 return results;
             } FC_CAPTURE_AND_RETHROW((block_num))
         }
-        void ChainDatabase::transaction_insert_to_ub_full_entry(const string & ub_account, const GdwTrxidBalance & ub_balance_record)
+        void ChainDatabase::transaction_insert_to_gdw_full_entry(const string & gdw_account, const GdwTrxidBalance & gdw_balance_record)
         {
-            auto iter_entry = my->_ub_full_entry.unordered_find(ub_account);
+            auto iter_entry = my->_gdw_full_entry.unordered_find(gdw_account);
             GdwBalanceEntry ubentrys;
-            if (iter_entry != my->_ub_full_entry.unordered_end())
+            if (iter_entry != my->_gdw_full_entry.unordered_end())
             {
                 ubentrys = iter_entry->second;
-                if (ubentrys.ub_trxid_sort.count(ub_balance_record.trx_id) != 0)
+                if (ubentrys.gdw_trxid_sort.count(gdw_balance_record.trx_id) != 0)
                 {
                     return;
                 }
             }
-            ubentrys.ub_trxid_sort.insert(ub_balance_record.trx_id);
-            ubentrys.ub_block_sort.insert(std::make_pair(ub_balance_record.block_num, ub_balance_record));
-            my->_ub_full_entry.store(ub_account, ubentrys);
+            ubentrys.gdw_trxid_sort.insert(gdw_balance_record.trx_id);
+            ubentrys.gdw_block_sort.insert(std::make_pair(gdw_balance_record.block_num, gdw_balance_record));
+            my->_gdw_full_entry.store(gdw_account, ubentrys);
         }
-        void ChainDatabase::transaction_erase_from_ub_full_entry(const string & ub_account, const GdwTrxidBalance & ub_balance_record)
+        void ChainDatabase::transaction_erase_from_gdw_full_entry(const string & gdw_account, const GdwTrxidBalance & gdw_balance_record)
         {
-            auto iter_entry = my->_ub_full_entry.unordered_find(ub_account);
-            if (iter_entry != my->_ub_full_entry.unordered_end())
+            auto iter_entry = my->_gdw_full_entry.unordered_find(gdw_account);
+            if (iter_entry != my->_gdw_full_entry.unordered_end())
             {
                 GdwBalanceEntry ubentrys = iter_entry->second;
-                ubentrys.ub_trxid_sort.erase(ub_balance_record.trx_id);
-                auto iter = ubentrys.ub_block_sort.lower_bound(ub_balance_record.block_num);
-                for (; iter != ubentrys.ub_block_sort.end();)
+                ubentrys.gdw_trxid_sort.erase(gdw_balance_record.trx_id);
+                auto iter = ubentrys.gdw_block_sort.lower_bound(gdw_balance_record.block_num);
+                for (; iter != ubentrys.gdw_block_sort.end();)
                 {
-                    if (iter->second.block_num != ub_balance_record.block_num)
+                    if (iter->second.block_num != gdw_balance_record.block_num)
                     {
                         break;
                     }
-                    if (iter->second.trx_id == ub_balance_record.trx_id)
+                    if (iter->second.trx_id == gdw_balance_record.trx_id)
                     {
-                        iter = ubentrys.ub_block_sort.erase(iter);
+                        iter = ubentrys.gdw_block_sort.erase(iter);
                     }
                     else
                     {
                         ++iter;
                     }
                 }
-                if (!(ubentrys.ub_block_sort.empty()))
+                if (!(ubentrys.gdw_block_sort.empty()))
                 {
-                    my->_ub_full_entry.store(ub_account, ubentrys);
+                    my->_gdw_full_entry.store(gdw_account, ubentrys);
                 }
                 else
                 {
-                    my->_ub_full_entry.remove(ub_account);
+                    my->_gdw_full_entry.remove(gdw_account);
                 }
             }
         }
-        void ChainDatabase::transaction_insert_to_ub_balance(const string & ub_account, const GdwTrxidBalance & ub_balance_entry)
+        void ChainDatabase::transaction_insert_to_gdw_balance(const string & gdw_account, const GdwTrxidBalance & gdw_balance_entry)
         {
-            auto iter_ids = my->_ub_input_balance_entry.unordered_find(ub_account);
+            auto iter_ids = my->_gdw_input_balance_entry.unordered_find(gdw_account);
             set<GdwTrxidBalance> ids;
-            if (iter_ids != my->_ub_input_balance_entry.unordered_end())
+            if (iter_ids != my->_gdw_input_balance_entry.unordered_end())
             {
                 ids = iter_ids->second;
             }
-            ids.insert(ub_balance_entry);
-            my->_ub_input_balance_entry.store(ub_account, ids);
+            ids.insert(gdw_balance_entry);
+            my->_gdw_input_balance_entry.store(gdw_account, ids);
         }
-        void ChainDatabase::transaction_erase_from_ub_balance(const string & ub_account, const GdwTrxidBalance & ub_balance_entry)
+        void ChainDatabase::transaction_erase_from_gdw_balance(const string & gdw_account, const GdwTrxidBalance & gdw_balance_entry)
         {
-            auto iter_ids = my->_ub_input_balance_entry.unordered_find(ub_account);
-            if (iter_ids != my->_ub_input_balance_entry.unordered_end())
+            auto iter_ids = my->_gdw_input_balance_entry.unordered_find(gdw_account);
+            if (iter_ids != my->_gdw_input_balance_entry.unordered_end())
             {
                 auto ids = iter_ids->second;
-                ids.erase(ub_balance_entry);
+                ids.erase(gdw_balance_entry);
                 if (!(ids.empty()))
                 {
-                    my->_ub_input_balance_entry.store(ub_account, ids);
+                    my->_gdw_input_balance_entry.store(gdw_account, ids);
                 }
                 else
                 {
-                    my->_ub_input_balance_entry.remove(ub_account);
+                    my->_gdw_input_balance_entry.remove(gdw_account);
                 }
             }
         }
@@ -3707,8 +3707,8 @@ namespace gdwcore {
                 next_path = dir / "_fork_number_db.json";
                 my->_fork_number_db.export_to_json(next_path);
                 ulog("Dumped ${p}", ("p", next_path));
-                next_path = dir / "ub_transaction_balance_db.json";
-                my->_ub_input_balance_entry.export_to_json(next_path);
+                next_path = dir / "gdw_transaction_balance_db.json";
+                my->_gdw_input_balance_entry.export_to_json(next_path);
 				ulog("Dumped ${p}", ("p", next_path));
 
 				next_path = dir / "_bytecode_hash_permitted.json";

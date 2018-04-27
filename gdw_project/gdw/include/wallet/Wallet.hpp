@@ -958,7 +958,7 @@ namespace gdwcore {
             * @param selection_method enumeration [vote_none | vote_all | vote_random | vote_recommended] (vote_strategy, optional,
             *                 defaults to "vote_recommended")
             * @param sign whether sign the transaction
-            * @param ub_account centralized system address
+            * @param gdw_account centralized system address
             *
             * @return WalletTransactionEntry
             */
@@ -970,7 +970,7 @@ namespace gdwcore {
                 const string& memo_message,
                 VoteStrategy selection_method,
                 bool sign,
-                const string& ub_account = ""
+                const string& gdw_account = ""
                 );
 
             WalletTransactionEntry transfer_asset_to_contract(

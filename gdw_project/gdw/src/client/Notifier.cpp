@@ -14,8 +14,8 @@ namespace gdwcore {
             {
             public:
                 fc::gntp_notifier _notifier;
-                fc::gntp_icon_ptr _ub_icon;
-                std::string _ub_instance_identifier;
+                fc::gntp_icon_ptr _gdw_icon;
+                std::string _gdw_instance_identifier;
 
                 bool     _shutting_down;
 
@@ -28,19 +28,19 @@ namespace gdwcore {
                 uint32_t _missed_block_count_threshold;
 
                 GdwGntpNotifierImpl(const std::string& host_to_notify = "127.0.0.1", uint16_t port = 23053,
-                    const std::string& ub_instance_identifier = "Gdw",
+                    const std::string& gdw_instance_identifier = "Gdw",
                     const fc::optional<std::string>& password = fc::optional<std::string>());
                 void register_notification_types();
             };
-            extern unsigned char ub_icon_png[];
-            extern unsigned ub_icon_png_len;
+            extern unsigned char gdw_icon_png[];
+            extern unsigned gdw_icon_png_len;
 
             GdwGntpNotifierImpl::GdwGntpNotifierImpl(const std::string&  host_to_notify /* = "127.0.0.1" */, uint16_t port /* = 23053 */,
-                const std::string& ub_instance_identifier /* = "Gdw" */,
+                const std::string& gdw_instance_identifier /* = "Gdw" */,
                 const fc::optional<std::string>& password /* = optional<std::string>() */) :
                 _notifier(host_to_notify, port, password),
-                _ub_icon(std::make_shared<fc::gntp_icon>((const char*)ub_icon_png, ub_icon_png_len)),
-                _ub_instance_identifier(ub_instance_identifier),
+                _gdw_icon(std::make_shared<fc::gntp_icon>((const char*)gdw_icon_png, gdw_icon_png_len)),
+                _gdw_instance_identifier(gdw_instance_identifier),
                 _shutting_down(false),
                 _last_reported_connection_count(0),
                 _connection_count_notification_threshold(5),
@@ -57,19 +57,19 @@ namespace gdwcore {
                 notification_type.name = "connection_count_below_threshold";
                 notification_type.display_name = "Connection Count Below Threshold";
                 notification_type.enabled = true;
-                notification_type.icon = _ub_icon;
+                notification_type.icon = _gdw_icon;
                 _notifier.add_notification_type(notification_type);
 
                 notification_type.name = "client_exiting_unexpectedly";
                 notification_type.display_name = "Client Exiting Unexpectedly";
                 notification_type.enabled = true;
-                notification_type.icon = _ub_icon;
+                notification_type.icon = _gdw_icon;
                 _notifier.add_notification_type(notification_type);
 
                 notification_type.name = "head_block_too_old";
                 notification_type.display_name = "Head Block is Too Old";
                 notification_type.enabled = true;
-                notification_type.icon = _ub_icon;
+                notification_type.icon = _gdw_icon;
                 _notifier.add_notification_type(notification_type);
 
                 _notifier.register_notifications();
@@ -77,12 +77,12 @@ namespace gdwcore {
         }
 
         GdwGntpNotifier::GdwGntpNotifier(const std::string& host_to_notify /* = "127.0.0.1" */, uint16_t port /* = 23053 */,
-            const std::string& ub_instance_identifier /* = "Gdw" */,
+            const std::string& gdw_instance_identifier /* = "Gdw" */,
             const fc::optional<std::string>& password /* = fc::optional<std::string>() */) :
-            my(new detail::GdwGntpNotifierImpl(host_to_notify, port, ub_instance_identifier, password))
+            my(new detail::GdwGntpNotifierImpl(host_to_notify, port, gdw_instance_identifier, password))
         {
             my->_notifier.set_application_name("Gdw");
-            my->_notifier.set_application_icon(my->_ub_icon);
+            my->_notifier.set_application_icon(my->_gdw_icon);
             my->register_notification_types();
         }
 
@@ -108,9 +108,9 @@ namespace gdwcore {
                 if (my->_last_connection_count_notification_time < notification_time_cutoff)
                 {
                     std::ostringstream message;
-                    message << my->_ub_instance_identifier << ": peer connection count dropped to " << new_connection_count <<
+                    message << my->_gdw_instance_identifier << ": peer connection count dropped to " << new_connection_count <<
                         ", which is below the warning threshold of " << my->_connection_count_notification_threshold;
-                    my->_notifier.send_notification("connection_count_below_threshold", "Connection Count Below Threshold", message.str(), my->_ub_icon);
+                    my->_notifier.send_notification("connection_count_below_threshold", "Connection Count Below Threshold", message.str(), my->_gdw_icon);
                     my->_last_reported_connection_count = new_connection_count;
                     my->_last_connection_count_notification_time = fc::time_point::now();
                 }
@@ -120,8 +120,8 @@ namespace gdwcore {
         void GdwGntpNotifier::notify_client_exiting_unexpectedly()
         {
             std::ostringstream message;
-            message << my->_ub_instance_identifier << ": client is exiting due to an unhandled exception";
-            my->_notifier.send_notification("client_exiting_unexpectedly", "Client Exiting Unexpectedly", message.str(), my->_ub_icon);
+            message << my->_gdw_instance_identifier << ": client is exiting due to an unhandled exception";
+            my->_notifier.send_notification("client_exiting_unexpectedly", "Client Exiting Unexpectedly", message.str(), my->_gdw_icon);
         }
 
         void GdwGntpNotifier::notify_head_block_too_old(const fc::time_point_sec head_block_age)
@@ -135,9 +135,9 @@ namespace gdwcore {
                     std::ostringstream message;
                     uint32_t age_in_sec = gdwcore::consensus::now().sec_since_epoch() - head_block_age.sec_since_epoch();
                     uint32_t missed_block_count = age_in_sec / GDW_BLOCKCHAIN_BLOCK_INTERVAL_SEC;
-                    message << my->_ub_instance_identifier << ": the last block on our blockchain is " << fc::get_approximate_relative_time_string(head_block_age, gdwcore::consensus::now(), " old") <<
+                    message << my->_gdw_instance_identifier << ": the last block on our blockchain is " << fc::get_approximate_relative_time_string(head_block_age, gdwcore::consensus::now(), " old") <<
                         ", meaning we've missed " << missed_block_count << " blocks";
-                    my->_notifier.send_notification("head_block_too_old", "Head Block is Too Old", message.str(), my->_ub_icon);
+                    my->_notifier.send_notification("head_block_too_old", "Head Block is Too Old", message.str(), my->_gdw_icon);
                     my->_last_head_block_too_old_notification_time = fc::time_point::now();
                 }
             }
@@ -146,7 +146,7 @@ namespace gdwcore {
 
         namespace detail
         {
-            unsigned char ub_icon_png[] = {
+            unsigned char gdw_icon_png[] = {
                 0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0x00, 0x00, 0x0d,
                 0x49, 0x48, 0x44, 0x52, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x40,
                 0x08, 0x02, 0x00, 0x00, 0x00, 0x25, 0x0b, 0xe6, 0x89, 0x00, 0x00, 0x00,
@@ -661,7 +661,7 @@ namespace gdwcore {
                 0x00, 0x12, 0xc2, 0xcb, 0x56, 0xae, 0xbc, 0xa9, 0x59, 0x00, 0x00, 0x00,
                 0x00, 0x49, 0x45, 0x4e, 0x44, 0xae, 0x42, 0x60, 0x82
             };
-            unsigned ub_icon_png_len = 6153;
+            unsigned gdw_icon_png_len = 6153;
 
         }
 
