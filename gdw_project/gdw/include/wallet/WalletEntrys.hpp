@@ -157,6 +157,7 @@ namespace gdwcore {
             fc::time_point_sec        created_time;
             fc::time_point_sec        received_time;
             vector<Address>           extra_addresses;
+			vector<char>			  trx_data;
         };
 
         struct LedgerEntry
@@ -429,6 +430,7 @@ FC_REFLECT_ENUM(gdwcore::wallet::WalletEntryTypeEnum,
     (created_time)
     (received_time)
     (extra_addresses)
+	(trx_data)
     )
 
     FC_REFLECT(gdwcore::wallet::LedgerEntry,

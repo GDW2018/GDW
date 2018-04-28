@@ -1443,6 +1443,7 @@ namespace gdwcore {
                 trans_entry.fee = required_fees + required_imessage_fee;
                 trans_entry.extra_addresses.push_back(to_address);
                 trans_entry.trx = trx;
+				trans_entry.trx_data = fc::raw::pack((Transaction)trans_entry.trx);
                 return trans_entry;
             } FC_CAPTURE_AND_RETHROW((real_amount_to_transfer)(amount_to_transfer_symbol)(from_account_public_key)(to_address)(memo_message))
         }
@@ -3529,6 +3530,7 @@ namespace gdwcore {
             trans_entry.fee = fee;
             trans_entry.trx = trx;
             trans_entry.entry_id = trx.id();
+			trans_entry.trx_data = fc::raw::pack((Transaction)trans_entry.trx);
             return trans_entry;
 
         }
