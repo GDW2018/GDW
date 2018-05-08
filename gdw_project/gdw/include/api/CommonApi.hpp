@@ -2140,9 +2140,9 @@ namespace gdwcore {
             *
             * @param trasaction_building the transaction which get from build interface (transaction_entry, required)
             *
-            * @return bool
+            * @return std::string
             */
-            virtual bool broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building) = 0;
+            virtual std::string broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building) = 0;
 
 
         };

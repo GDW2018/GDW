@@ -274,7 +274,7 @@ namespace gdwcore {
             gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract_build(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec) override;
             gdwcore::wallet::WalletTransactionEntry wallet_call_contract_build(const std::string& contract, const std::string& caller_publickey, const std::string& function_name, const std::string& params, const std::string& asset_symbol, const fc::optional<double>& call_limit) override;
             gdwcore::wallet::WalletTransactionEntry sign_build_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building) override;
-            bool broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building) override;
+			std::string broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building) override;
         };
 
     }
