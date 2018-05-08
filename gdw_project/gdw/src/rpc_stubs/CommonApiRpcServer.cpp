@@ -6335,7 +6335,7 @@ namespace gdwcore {
                 FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 1 (trasaction_building)");
             gdwcore::wallet::WalletTransactionEntry trasaction_building = parameters[0].as<gdwcore::wallet::WalletTransactionEntry>();
 
-            bool result = get_client()->broadcast_building_transaction(trasaction_building);
+			std::string result = get_client()->broadcast_building_transaction(trasaction_building);
             return fc::variant(result);
         }
 
@@ -6350,7 +6350,7 @@ namespace gdwcore {
                 FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'trasaction_building'");
             gdwcore::wallet::WalletTransactionEntry trasaction_building = parameters["trasaction_building"].as<gdwcore::wallet::WalletTransactionEntry>();
 
-            bool result = get_client()->broadcast_building_transaction(trasaction_building);
+			std::string result = get_client()->broadcast_building_transaction(trasaction_building);
             return fc::variant(result);
         }
 

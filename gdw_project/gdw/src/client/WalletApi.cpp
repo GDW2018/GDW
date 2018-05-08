@@ -647,12 +647,12 @@ namespace gdwcore {
 
             }
 
-            bool  detail::ClientImpl::broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building)
+			std::string detail::ClientImpl::broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building)
             {
                 WalletTransactionEntry trx_entry = trasaction_building;
                 _wallet->cache_transaction(trx_entry);
                 network_broadcast_transaction(trx_entry.trx);
-                return true;
+				return trx_entry.trx.id().str();
             }
 
             WalletTransactionEntry detail::ClientImpl::wallet_transfer_to_address(

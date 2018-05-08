@@ -1185,10 +1185,10 @@ namespace gdwcore {
             return result.as<gdwcore::wallet::WalletTransactionEntry>();
         }
 
-        bool CommonApiRpcClient::broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building)
+		std::string CommonApiRpcClient::broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building)
         {
             fc::variant result = get_json_connection()->async_call("broadcast_building_transaction", std::vector<fc::variant>{fc::variant(trasaction_building)}).wait();
-            return result.as<bool>();
+            return result.as<std::string>();
         }
 
         gdwcore::wallet::WalletTransactionEntry CommonApiRpcClient::wallet_transfer_to_contract_build(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec)

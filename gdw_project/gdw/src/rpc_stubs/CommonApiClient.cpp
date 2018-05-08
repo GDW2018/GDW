@@ -7347,7 +7347,7 @@ namespace gdwcore {
             FC_RETHROW_EXCEPTIONS(warn, "")
         }
 
-        bool CommonApiClient::broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building)
+		std::string CommonApiClient::broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building)
         {
             ilog("received RPC call: broadcast_building_transaction(${trasaction_building})", ("trasaction_building", trasaction_building));
             gdwcore::api::GlobalApiLogger* glog = gdwcore::api::GlobalApiLogger::get_instance();
@@ -7367,7 +7367,7 @@ namespace gdwcore {
             } execution_time_logger;
             try
             {
-                bool result = get_impl()->broadcast_building_transaction(trasaction_building);
+                std:string result = get_impl()->broadcast_building_transaction(trasaction_building);
                 if (call_id != 0)
                     glog->log_call_finished(call_id, this, "broadcast_building_transaction", args, fc::variant(result));
 
