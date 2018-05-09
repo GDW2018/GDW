@@ -338,7 +338,7 @@ namespace gdwcore
 
             }
 
-            WalletTransactionEntry  ClientImpl::simulator_transfer_to_contract(double amount_to_transfer,
+            WalletTransactionEntry  ClientImpl::simulator_transfer_to_contract(const string& amount_to_transfer,
                 const string& asset_symbol,
                 const string& from_account_name,
                 const string& to_contract,
@@ -360,7 +360,7 @@ namespace gdwcore
             }
 
             std::vector<gdwcore::consensus::Asset> ClientImpl::simulator_transfer_to_contract_testing(
-                double amount_to_transfer,
+                const string& amount_to_transfer,
                 const string& asset_symbol,
                 const string& from_account_name,
                 const string& to_contract)

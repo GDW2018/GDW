@@ -4759,7 +4759,7 @@ namespace gdwcore {
             FC_RETHROW_EXCEPTIONS(warn, "")
         }
 
-        gdwcore::wallet::WalletTransactionEntry CommonApiClient::wallet_transfer_to_contract(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec)
+        gdwcore::wallet::WalletTransactionEntry CommonApiClient::wallet_transfer_to_contract(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec)
         {
             ilog("received RPC call: wallet_transfer_to_contract(${amount_to_transfer}, ${asset_symbol}, ${from_account_name}, ${to_contract}, ${amount_for_exec})", ("amount_to_transfer", amount_to_transfer)("asset_symbol", asset_symbol)("from_account_name", from_account_name)("to_contract", to_contract)("amount_for_exec", amount_for_exec));
             gdwcore::api::GlobalApiLogger* glog = gdwcore::api::GlobalApiLogger::get_instance();
@@ -4792,7 +4792,7 @@ namespace gdwcore {
             FC_RETHROW_EXCEPTIONS(warn, "")
         }
 
-        std::vector<gdwcore::consensus::Asset> CommonApiClient::wallet_transfer_to_contract_testing(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract)
+        std::vector<gdwcore::consensus::Asset> CommonApiClient::wallet_transfer_to_contract_testing(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract)
         {
             ilog("received RPC call: wallet_transfer_to_contract_testing(${amount_to_transfer}, ${asset_symbol}, ${from_account_name}, ${to_contract})", ("amount_to_transfer", amount_to_transfer)("asset_symbol", asset_symbol)("from_account_name", from_account_name)("to_contract", to_contract));
             gdwcore::api::GlobalApiLogger* glog = gdwcore::api::GlobalApiLogger::get_instance();
@@ -6496,7 +6496,7 @@ namespace gdwcore {
             FC_RETHROW_EXCEPTIONS(warn, "")
         }
 
-        gdwcore::wallet::WalletTransactionEntry CommonApiClient::simulator_transfer_to_contract(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec)
+        gdwcore::wallet::WalletTransactionEntry CommonApiClient::simulator_transfer_to_contract(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec)
         {
             ilog("received RPC call: simulator_transfer_to_contract(${amount_to_transfer}, ${asset_symbol}, ${from_account_name}, ${to_contract}, ${amount_for_exec})", ("amount_to_transfer", amount_to_transfer)("asset_symbol", asset_symbol)("from_account_name", from_account_name)("to_contract", to_contract)("amount_for_exec", amount_for_exec));
             gdwcore::api::GlobalApiLogger* glog = gdwcore::api::GlobalApiLogger::get_instance();
@@ -6679,7 +6679,7 @@ namespace gdwcore {
             FC_RETHROW_EXCEPTIONS(warn, "")
         }
 
-        std::vector<gdwcore::consensus::Asset> CommonApiClient::simulator_transfer_to_contract_testing(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract)
+        std::vector<gdwcore::consensus::Asset> CommonApiClient::simulator_transfer_to_contract_testing(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract)
         {
             ilog("received RPC call: simulator_transfer_to_contract_testing(${amount_to_transfer}, ${asset_symbol}, ${from_account_name}, ${to_contract})", ("amount_to_transfer", amount_to_transfer)("asset_symbol", asset_symbol)("from_account_name", from_account_name)("to_contract", to_contract));
             gdwcore::api::GlobalApiLogger* glog = gdwcore::api::GlobalApiLogger::get_instance();
@@ -7251,7 +7251,7 @@ namespace gdwcore {
             FC_RETHROW_EXCEPTIONS(warn, "")
         }
 
-        gdwcore::wallet::WalletTransactionEntry CommonApiClient::wallet_transfer_to_contract_build(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec)
+        gdwcore::wallet::WalletTransactionEntry CommonApiClient::wallet_transfer_to_contract_build(const string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec)
         {
             ilog("received RPC call: wallet_transfer_to_contract_build(${amount_to_transfer}, ${asset_symbol}, ${from_account_public_key}, ${to_contract}, ${amount_for_exec})", ("amount_to_transfer", amount_to_transfer)("asset_symbol", asset_symbol)("from_account_public_key", from_account_public_key)("to_contract", to_contract)("amount_for_exec", amount_for_exec));
             gdwcore::api::GlobalApiLogger* glog = gdwcore::api::GlobalApiLogger::get_instance();

@@ -700,7 +700,7 @@ namespace gdwcore {
                 const string& gdw_account = "");
 
             gdwcore::wallet::WalletTransactionEntry transfer_asset_to_contract_without_signature(
-                double real_amount_to_transfer,
+                const string& real_amount_to_transfer,
                 const string& amount_to_transfer_symbol,
                 const string& from_account_public_key_str,
                 const Address& to_contract_address,
@@ -974,7 +974,7 @@ namespace gdwcore {
                 );
 
             WalletTransactionEntry transfer_asset_to_contract(
-                double real_amount_to_transfer,
+                const string& real_amount_to_transfer,
                 const string& amount_to_transfer_symbol,
                 const string& from_account_name,
                 const Address& to_contract_address,
@@ -983,7 +983,7 @@ namespace gdwcore {
                 bool is_testing = false);
 
             std::vector<gdwcore::consensus::Asset> transfer_asset_to_contract_testing(
-                double real_amount_to_transfer,
+                const string& real_amount_to_transfer,
                 const string& amount_to_transfer_symbol,
                 const string& from_account_name,
                 const Address& to_contract_address,

@@ -174,8 +174,8 @@
             std::string wallet_account_balance_rpc(const std::string& account_name = fc::json::from_string("\"\"").as<std::string>()) const override;
             std::string wallet_transfer_to_public_account_rpc(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_account_name, const gdwcore::consensus::Imessage& memo_message = fc::json::from_string("\"\"").as<gdwcore::consensus::Imessage>(), const gdwcore::wallet::VoteStrategy& strategy = fc::json::from_string("\"vote_recommended\"").as<gdwcore::wallet::VoteStrategy>()) override;
             gdwcore::consensus::PublicKeyType wallet_get_account_owner_publickey(const std::string& account_name) override;
-            gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec) override;
-            std::vector<gdwcore::consensus::Asset> wallet_transfer_to_contract_testing(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract) override;
+            gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec) override;
+            std::vector<gdwcore::consensus::Asset> wallet_transfer_to_contract_testing(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract) override;
             vector<string> wallet_get_contracts(const std::string& account_name = fc::json::from_string("\"\"").as<std::string>()) override;
             void wallet_scan_contracts() override;
             gdwcore::wallet::TransactionBuilder wallet_builder_add_signature(const gdwcore::wallet::TransactionBuilder& builder, bool broadcast = fc::json::from_string("false").as<bool>()) override;
@@ -231,13 +231,13 @@
             std::vector<gdwcore::consensus::Asset> simulator_contract_destroy_testing(const std::string& contract_address, const std::string& destroyer_name) override;
             gdwcore::consensus::ContractEntryPrintable simulator_contract_get_info(const std::string& contract) override;
             std::vector<gdwcore::consensus::BalanceEntry> simulator_contract_get_balance(const std::string& contract) override;
-            gdwcore::wallet::WalletTransactionEntry simulator_transfer_to_contract(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec) override;
+            gdwcore::wallet::WalletTransactionEntry simulator_transfer_to_contract(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec) override;
             gdwcore::wallet::AccountBalanceSummaryType simulator_account_balance(const std::string& account_name = fc::json::from_string("\"\"").as<std::string>()) override;
             fc::path simulator_contract_compile(const fc::path& filename) const override;
             gdwcore::consensus::ContractEntryPrintable simulator_contract_load_to_file(const std::string& contract, const fc::path& file) override;
             std::vector<gdwcore::consensus::Asset> simulator_contract_register_testing(const std::string& owner, const fc::path& codefile) override;
             std::vector<gdwcore::consensus::Asset> simulator_contract_call_testing(const std::string& contract, const std::string& caller_name, const std::string& function_name, const std::string& params) override;
-            std::vector<gdwcore::consensus::Asset> simulator_transfer_to_contract_testing(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract) override;
+            std::vector<gdwcore::consensus::Asset> simulator_transfer_to_contract_testing(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract) override;
             vector<gdwcore::consensus::SimulatorAccountInfo> simulator_list_my_addresses(const std::string& account_name = fc::json::from_string("\"\"").as<std::string>()) override;
             std::string get_contract_registered_in_transaction(const gdwcore::consensus::TransactionIdType& trx_id) override;
             gdwcore::consensus::TransactionIdType get_transaction_id_contract_registered(const std::string& contract_id) override;
@@ -257,7 +257,7 @@
             void script_delete_event_handler(const std::string& contract_id_str, const std::string& event_type, const std::string& script_id) override;
 			
 			gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_address_build(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_address, const gdwcore::consensus::Imessage& memo_message = fc::json::from_string("\"\"").as<gdwcore::consensus::Imessage>(), const gdwcore::wallet::VoteStrategy& strategy = fc::json::from_string("\"vote_none\"").as<gdwcore::wallet::VoteStrategy>()) override;
-			gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract_build(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec) override;
+			gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract_build(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec) override;
             gdwcore::wallet::WalletTransactionEntry wallet_call_contract_build(const std::string& contract, const std::string& caller_publickey, const std::string& function_name, const std::string& params, const std::string& asset_symbol, const fc::optional<double>& call_limit) override;
             gdwcore::wallet::WalletTransactionEntry sign_build_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building) override;
 			std::string broadcast_building_transaction(const gdwcore::wallet::WalletTransactionEntry& trasaction_building) override;

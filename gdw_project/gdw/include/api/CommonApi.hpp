@@ -1376,7 +1376,7 @@ namespace gdwcore {
              *
              * @return transaction_entry
              */
-            virtual gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec) = 0;
+            virtual gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec) = 0;
             /**
              * Do a simple transfer to a contract (name or address) on local endpoint, and do not spread it on P2P
              * network.
@@ -1388,7 +1388,7 @@ namespace gdwcore {
              *
              * @return asset_array
              */
-            virtual std::vector<gdwcore::consensus::Asset> wallet_transfer_to_contract_testing(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract) = 0;
+            virtual std::vector<gdwcore::consensus::Asset> wallet_transfer_to_contract_testing(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract) = 0;
             /**
              * get all the contracts belong to the account of the wallet.
              *
@@ -1895,7 +1895,7 @@ namespace gdwcore {
              *
              * @return transaction_entry
              */
-            virtual gdwcore::wallet::WalletTransactionEntry simulator_transfer_to_contract(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec) = 0;
+            virtual gdwcore::wallet::WalletTransactionEntry simulator_transfer_to_contract(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec) = 0;
             /**
              * in simulator state: lookup balance of account.
              *
@@ -1953,7 +1953,7 @@ namespace gdwcore {
              *
              * @return asset_array
              */
-            virtual std::vector<gdwcore::consensus::Asset> simulator_transfer_to_contract_testing(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract) = 0;
+            virtual std::vector<gdwcore::consensus::Asset> simulator_transfer_to_contract_testing(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract) = 0;
             /**
              * list the account info of the wallet.
              *
@@ -2111,7 +2111,7 @@ namespace gdwcore {
             *
             * @return transaction_entry
             */
-            virtual gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract_build(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec) = 0;
+            virtual gdwcore::wallet::WalletTransactionEntry wallet_transfer_to_contract_build(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec) = 0;
 
             /**
             * call contract by contract name or contract address without signature.

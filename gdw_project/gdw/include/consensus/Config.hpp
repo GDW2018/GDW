@@ -17,10 +17,10 @@
  */
 #define GDW_ADDRESS_PREFIX                                  "G"
 #define GDW_BLOCKCHAIN_SYMBOL                               "GDW"
-#define GDW_BLOCKCHAIN_NAME                                 "Golden World"
-#define GDW_BLOCKCHAIN_DESCRIPTION                          "Golden World For Future"
+#define GDW_BLOCKCHAIN_NAME                                 "GDW"
+#define GDW_BLOCKCHAIN_DESCRIPTION                          "Golden World"
 			
-#define GDW_BLOCKCHAIN_PRECISION                            10000
+#define GDW_BLOCKCHAIN_PRECISION                            (int64_t(100000))
 
 #define GDW_BLOCKCHAIN_MAX_UIA_MARKET_FEE                   10000
 #define GDW_BLOCKCHAIN_BLOCK_INTERVAL_SEC                   int64_t(10)
@@ -28,7 +28,7 @@
 #define GDW_BLOCKCHAIN_BLOCKS_PER_DAY                       (GDW_BLOCKCHAIN_BLOCKS_PER_HOUR*int64_t(24))
 #define GDW_BLOCKCHAIN_BLOCKS_PER_YEAR                      (GDW_BLOCKCHAIN_BLOCKS_PER_DAY*int64_t(365))
 
-#define GDW_BLOCKCHAIN_NUM_DELEGATES                        uint32_t(7)
+#define GDW_BLOCKCHAIN_NUM_DELEGATES                        uint32_t(9)
 #define GDW_MAX_DELEGATE_PAY_PER_BLOCK                      int64_t( 1.7 * GDW_BLOCKCHAIN_PRECISION ) 
 #define GDW_BLOCKCHAIN_MAX_UNDO_HISTORY                     GDW_BLOCKCHAIN_BLOCKS_PER_HOUR
 
@@ -44,7 +44,7 @@
 #define GDW_BLOCKCHAIN_EXTENDED_MEMO_SIZE                   32 // bytes
 #define GDW_BLOCKCHAIN_MAX_EXTENDED_MEMO_SIZE               (GDW_BLOCKCHAIN_MAX_MEMO_SIZE + GDW_BLOCKCHAIN_EXTENDED_MEMO_SIZE)
 
-#define GDW_DEFAULT_TRANSACTION_FEE                         100 // 
+#define GDW_DEFAULT_TRANSACTION_FEE                         (int64_t(1000)) // 
 #define GDW_DEFAULT_TRANSACTION_EXPIRATION_SEC              (60*60)
 #define GDW_DEFAULT_CONTRACT_MARGIN                         (int64_t)10000000 * GDW_BLOCKCHAIN_PRECISION 
 

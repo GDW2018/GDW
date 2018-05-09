@@ -5031,7 +5031,7 @@ namespace gdwcore {
 
 			if (parameters.size() <= 0)
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 1 (amount_to_transfer)");
-			double amount_to_transfer = parameters[0].as<double>();
+            std::string amount_to_transfer = parameters[0].as<std::string>();
 			if (parameters.size() <= 1)
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 2 (asset_symbol)");
 			std::string asset_symbol = parameters[1].as<std::string>();
@@ -5059,7 +5059,7 @@ namespace gdwcore {
 
 			if (!parameters.contains("amount_to_transfer"))
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'amount_to_transfer'");
-			double amount_to_transfer = parameters["amount_to_transfer"].as<double>();
+            std::string amount_to_transfer = parameters["amount_to_transfer"].as<std::string>();
 			if (!parameters.contains("asset_symbol"))
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'asset_symbol'");
 			std::string asset_symbol = parameters["asset_symbol"].as<std::string>();
@@ -5087,7 +5087,7 @@ namespace gdwcore {
 
 			if (parameters.size() <= 0)
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 1 (amount_to_transfer)");
-			double amount_to_transfer = parameters[0].as<double>();
+            std::string amount_to_transfer = parameters[0].as<std::string>();
 			if (parameters.size() <= 1)
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 2 (asset_symbol)");
 			std::string asset_symbol = parameters[1].as<std::string>();
@@ -5112,7 +5112,7 @@ namespace gdwcore {
 
 			if (!parameters.contains("amount_to_transfer"))
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'amount_to_transfer'");
-			double amount_to_transfer = parameters["amount_to_transfer"].as<double>();
+            std::string amount_to_transfer = parameters["amount_to_transfer"].as<std::string>();
 			if (!parameters.contains("asset_symbol"))
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'asset_symbol'");
 			std::string asset_symbol = parameters["asset_symbol"].as<std::string>();
@@ -6187,7 +6187,7 @@ namespace gdwcore {
 
             if (parameters.size() <= 0)
                 FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 1 (amount_to_transfer)");
-            double amount_to_transfer = parameters[0].as<double>();
+            std::string amount_to_transfer = parameters[0].as<std::string>();
             if (parameters.size() <= 1)
                 FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 2 (asset_symbol)");
             std::string asset_symbol = parameters[1].as<std::string>();
@@ -6214,7 +6214,7 @@ namespace gdwcore {
 
             if (!parameters.contains("amount_to_transfer"))
                 FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'amount_to_transfer'");
-            double amount_to_transfer = parameters["amount_to_transfer"].as<double>();
+            std::string amount_to_transfer = parameters["amount_to_transfer"].as<std::string>();
             if (!parameters.contains("asset_symbol"))
                 FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'asset_symbol'");
             std::string asset_symbol = parameters["asset_symbol"].as<std::string>();
@@ -7385,7 +7385,7 @@ namespace gdwcore {
 
 			if (parameters.size() <= 0)
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 1 (amount_to_transfer)");
-			double amount_to_transfer = parameters[0].as<double>();
+            std::string amount_to_transfer = parameters[0].as<std::string>();
 			if (parameters.size() <= 1)
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 2 (asset_symbol)");
 			std::string asset_symbol = parameters[1].as<std::string>();
@@ -7414,7 +7414,7 @@ namespace gdwcore {
 
 			if (!parameters.contains("amount_to_transfer"))
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'amount_to_transfer'");
-			double amount_to_transfer = parameters["amount_to_transfer"].as<double>();
+            std::string amount_to_transfer = parameters["amount_to_transfer"].as<std::string>();
 			if (!parameters.contains("asset_symbol"))
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'asset_symbol'");
 			std::string asset_symbol = parameters["asset_symbol"].as<std::string>();
@@ -7643,7 +7643,7 @@ namespace gdwcore {
 
 			if (parameters.size() <= 0)
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 1 (amount_to_transfer)");
-			double amount_to_transfer = parameters[0].as<double>();
+            std::string amount_to_transfer = parameters[0].as<std::string>();
 			if (parameters.size() <= 1)
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 2 (asset_symbol)");
 			std::string asset_symbol = parameters[1].as<std::string>();
@@ -7669,7 +7669,7 @@ namespace gdwcore {
 
 			if (!parameters.contains("amount_to_transfer"))
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'amount_to_transfer'");
-			double amount_to_transfer = parameters["amount_to_transfer"].as<double>();
+            std::string amount_to_transfer = parameters["amount_to_transfer"].as<std::string>();
 			if (!parameters.contains("asset_symbol"))
 				FC_THROW_EXCEPTION(fc::invalid_arg_exception, "missing required parameter 'asset_symbol'");
 			std::string asset_symbol = parameters["asset_symbol"].as<std::string>();

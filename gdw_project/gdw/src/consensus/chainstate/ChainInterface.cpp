@@ -509,7 +509,7 @@ namespace gdwcore {
                 return 0;
             }
             //return amount / LIMIT_PRICE;
-			return amount / 10 * LIMIT_PER_AMOUNT;
+			return amount / 100 * LIMIT_PER_AMOUNT;
 
         }
 
@@ -518,7 +518,7 @@ namespace gdwcore {
 			ShareType res = limit / LIMIT_PER_AMOUNT;
 			if (limit % LIMIT_PER_AMOUNT != 0)
 				++res;
-			return Asset(res * 10, asset_id);
+			return Asset(res * 100, asset_id);
         }
 
         // for contract to address (default fee)

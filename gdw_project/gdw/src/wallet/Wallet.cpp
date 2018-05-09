@@ -1270,7 +1270,7 @@ namespace gdwcore {
         }
 
         gdwcore::wallet::WalletTransactionEntry Wallet::transfer_asset_to_contract_without_signature(
-            double real_amount_to_transfer,
+            const string& real_amount_to_transfer,
             const string& amount_to_transfer_symbol,
             const string& from_account_public_key_str,
             const Address& to_contract_address,
@@ -1294,8 +1294,9 @@ namespace gdwcore {
                 const int64_t precision = asset_rec->precision ? asset_rec->precision : 1;
                 //ShareType amount_to_transfer = real_amount_to_transfer * precision;
                 //Asset asset_to_transfer(amount_to_transfer, asset_id);
-                FC_ASSERT(real_amount_to_transfer >= 1.0 / precision, "transfer amount must bigger than 0");
-                Asset asset_to_transfer = to_asset(asset_rec->id, precision, real_amount_to_transfer);
+                Asset asset_to_transfer = my->_blockchain->to_ugly_asset(real_amount_to_transfer, GDW_BLOCKCHAIN_SYMBOL);
+                FC_ASSERT(asset_to_transfer.amount >= 0, "transfer amount must bigger than 0");
+ 
 
                 //ShareType amount_for_exec = exec_cost * precision;
                 //Asset asset_for_exec(amount_for_exec, asset_id);
@@ -1361,9 +1362,8 @@ namespace gdwcore {
                     int64_t precision_input = static_cast<int64_t>(pow(10, str.size()));
                     FC_ASSERT((precision_input <= precision), "Precision is not correct");
                 }
-                double dAmountToTransfer = std::stod(real_amount_to_transfer);
-                ShareType amount_to_transfer = static_cast<ShareType>(floor(dAmountToTransfer * precision + 0.5));
-                Asset asset_to_transfer(amount_to_transfer, asset_id);
+             
+                Asset asset_to_transfer = my->_blockchain->to_ugly_asset(real_amount_to_transfer, amount_to_transfer_symbol);
 
                 PublicKeyType sender_public_key = from_account_public_key;
                 Address          sender_account_address = (Address)sender_public_key;
@@ -3202,8 +3202,9 @@ namespace gdwcore {
                     int64_t precision_input = static_cast<int64_t>(pow(10, str.size()));
                     FC_ASSERT((static_cast<uint64_t>(precision_input) <= asset_rec->precision), "Precision is not correct");
                 }
-                double dAmountToWithdraw = std::stod(real_amount_to_withdraw);
-                ShareType amount_to_withdraw((ShareType)(floor(dAmountToWithdraw * asset_rec->precision + 0.5)));
+                
+                Asset asset_to_transfer = my->_blockchain->to_ugly_asset(real_amount_to_withdraw, asset_rec->symbol);
+                ShareType amount_to_withdraw = asset_to_transfer.amount;
 
                 auto delegate_account_entry = my->_blockchain->get_account_entry(delegate_name);
                 FC_ASSERT(delegate_account_entry.valid());
@@ -4081,9 +4082,8 @@ namespace gdwcore {
                     int64_t precision_input = static_cast<int64_t>(pow(10, str.size()));
                     FC_ASSERT((precision_input <= precision), "Precision is not correct");
                 }
-                double dAmountToTransfer = std::stod(real_amount_to_transfer);
-                ShareType amount_to_transfer = static_cast<ShareType>(floor(dAmountToTransfer * precision + 0.5));
-                Asset asset_to_transfer(amount_to_transfer, asset_id);
+                
+                Asset asset_to_transfer = my->_blockchain->to_ugly_asset(real_amount_to_transfer, amount_to_transfer_symbol);
 
                 PrivateKeyType sender_private_key = get_active_private_key(from_account_name);
                 PublicKeyType  sender_public_key = sender_private_key.get_public_key();
@@ -4171,7 +4171,7 @@ namespace gdwcore {
 
         // common account -> contract account  (contract balance)
         gdwcore::wallet::WalletTransactionEntry Wallet::transfer_asset_to_contract(
-            double real_amount_to_transfer,
+            const string& real_amount_to_transfer,
             const string& amount_to_transfer_symbol,
             const string& from_account_name,
             const Address& to_contract_address,
@@ -4197,8 +4197,8 @@ namespace gdwcore {
                 const int64_t precision = asset_rec->precision ? asset_rec->precision : 1;
                 //ShareType amount_to_transfer = real_amount_to_transfer * precision;
                 //Asset asset_to_transfer(amount_to_transfer, asset_id);
-                FC_ASSERT(real_amount_to_transfer>=1.0/precision,"transfer amount must bigger than 0");
-                Asset asset_to_transfer = to_asset(asset_rec->id, precision, real_amount_to_transfer);
+                Asset asset_to_transfer = my->_blockchain->to_ugly_asset(real_amount_to_transfer, GDW_BLOCKCHAIN_SYMBOL);
+                FC_ASSERT(asset_to_transfer.amount >= 0, "transfer amount must bigger than 0");
 
                 //ShareType amount_for_exec = exec_cost * precision;
                 //Asset asset_for_exec(amount_for_exec, asset_id);
@@ -4245,7 +4245,7 @@ namespace gdwcore {
         }
 
         std::vector<gdwcore::consensus::Asset> Wallet::transfer_asset_to_contract_testing(
-            double real_amount_to_transfer,
+            const string& real_amount_to_transfer,
             const string& amount_to_transfer_symbol,
             const string& from_account_name,
             const Address& to_contract_address,
@@ -4263,10 +4263,8 @@ namespace gdwcore {
                 const auto asset_id = asset_rec->id;
                 FC_ASSERT(asset_id == 0, "Asset symbol should be GDW");
 
-                const int64_t precision = asset_rec->precision ? asset_rec->precision : 1;
-                ShareType amount_to_transfer = real_amount_to_transfer * precision;
+                Asset asset_to_transfer = my->_blockchain->to_ugly_asset(real_amount_to_transfer, amount_to_transfer_symbol);
 
-                Asset asset_to_transfer(amount_to_transfer, asset_id);
                 Asset asset_for_exec = my->_blockchain->get_amount(CONTRACT_TESTING_LIMIT_MAX);
                 Asset required_fees = get_transaction_fee(asset_to_transfer.asset_id);
 
@@ -4966,8 +4964,9 @@ namespace gdwcore {
                     int64_t precision_input = static_cast<int64_t>(pow(10, str.size()));
                     FC_ASSERT((static_cast<uint64_t>(precision_input) <= precision), "Precision is not correct");
                 }
-                double dAmountToCreate = std::stod(max_share_supply);
-                ShareType max_share_supply_in_internal_units = floor(dAmountToCreate * precision + 0.5);
+                
+                Asset asset_to_transfer = my->_blockchain->to_ugly_asset(max_share_supply, symbol);
+                ShareType max_share_supply_in_internal_units = asset_to_transfer.amount;
                 FC_ASSERT(GDW_BLOCKCHAIN_MAX_SHARES > max_share_supply_in_internal_units);
                 if (NOT is_market_issued)
                 {
@@ -5070,8 +5069,7 @@ namespace gdwcore {
                     int64_t precision_input = static_cast<int64_t>(pow(10, str.size()));
                     FC_ASSERT((static_cast<uint32_t>(precision_input) <= asset_entry->precision), "Precision is not correct");
                 }
-                double dAmountToIssue = std::stod(amount_to_issue);
-                Asset shares_to_issue(static_cast<ShareType>(floor(dAmountToIssue * asset_entry->precision + 0.5)), asset_entry->id);
+                Asset shares_to_issue = my->_blockchain->to_ugly_asset(amount_to_issue, symbol);
                 my->withdraw_to_transaction(required_fees,
                     issuer_account->name,
                     trx,

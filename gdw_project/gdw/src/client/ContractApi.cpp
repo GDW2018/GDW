@@ -355,7 +355,7 @@ namespace gdwcore {
 
             
             WalletTransactionEntry detail::ClientImpl::wallet_transfer_to_contract_build(
-                double amount_to_transfer,
+                const string& amount_to_transfer,
                 const string& asset_symbol,
                 const string& from_account_public_key,
                 const string& to_contract, double amount_for_exec)
@@ -582,7 +582,7 @@ namespace gdwcore {
             }
 
             WalletTransactionEntry detail::ClientImpl::wallet_transfer_to_contract(
-                double amount_to_transfer,
+                const string& amount_to_transfer,
                 const string& asset_symbol,
                 const string& from_account_name,
                 const string& to_contract, double amount_for_exec)
@@ -606,7 +606,7 @@ namespace gdwcore {
             }
 
             std::vector<gdwcore::consensus::Asset> ClientImpl::wallet_transfer_to_contract_testing(
-                double amount_to_transfer,
+                const string& amount_to_transfer,
                 const string& asset_symbol,
                 const string& from_account_name,
                 const string& to_contract)

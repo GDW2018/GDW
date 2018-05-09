@@ -18,8 +18,8 @@ namespace gdwcore {
                     FC_THROW_EXCEPTION(simulator_command_forbidden, "in simulator, this command is forbidden, you cannot call it!");
 
                 if (first > 0) --first;
-                FC_ASSERT(first < GDW_BLOCKCHAIN_NUM_DELEGATES, "Only the first 7 delegates are active");
-                FC_ASSERT(first + count <= GDW_BLOCKCHAIN_NUM_DELEGATES, "Only the first 7 delegates are active");
+                FC_ASSERT(first < GDW_BLOCKCHAIN_NUM_DELEGATES, "Only the first 9 delegates are active");
+                FC_ASSERT(first + count <= GDW_BLOCKCHAIN_NUM_DELEGATES, "Only the first 9 delegates are active");
                 vector<AccountIdType> all_delegate_ids = _chain_db->get_active_delegates();
                 FC_ASSERT(all_delegate_ids.size() == GDW_BLOCKCHAIN_NUM_DELEGATES, "The num of active delegates should equal to GDW_BLOCKCHAIN_NUM_DELEGATES");
                 vector<AccountIdType> delegate_ids(all_delegate_ids.begin() + first, all_delegate_ids.begin() + first + count);

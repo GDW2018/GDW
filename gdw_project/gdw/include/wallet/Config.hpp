@@ -7,7 +7,7 @@
 
 #define GDW_WALLET_DEFAULT_UNLOCK_TIME_SEC                  ( 60 * 60 )
 
-#define GDW_WALLET_DEFAULT_TRANSACTION_FEE                  100 // 
+#define GDW_WALLET_DEFAULT_TRANSACTION_FEE                  (int64_t(1000)) // 
 
 #define GDW_WALLET_DEFAULT_TRANSACTION_EXPIRATION_SEC       ( 60 * 60 )
 

@@ -778,12 +778,12 @@ namespace gdwcore {
             fc::variant result = get_json_connection()->async_call("wallet_get_account_owner_publickey", std::vector<fc::variant>{fc::variant(account_name)}).wait();
             return result.as<gdwcore::consensus::PublicKeyType>();
         }
-        gdwcore::wallet::WalletTransactionEntry CommonApiRpcClient::wallet_transfer_to_contract(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec)
+        gdwcore::wallet::WalletTransactionEntry CommonApiRpcClient::wallet_transfer_to_contract(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec)
         {
             fc::variant result = get_json_connection()->async_call("wallet_transfer_to_contract", std::vector<fc::variant>{fc::variant(amount_to_transfer), fc::variant(asset_symbol), fc::variant(from_account_name), fc::variant(to_contract), fc::variant(amount_for_exec)}).wait();
             return result.as<gdwcore::wallet::WalletTransactionEntry>();
         }
-        std::vector<gdwcore::consensus::Asset> CommonApiRpcClient::wallet_transfer_to_contract_testing(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract)
+        std::vector<gdwcore::consensus::Asset> CommonApiRpcClient::wallet_transfer_to_contract_testing(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract)
         {
             fc::variant result = get_json_connection()->async_call("wallet_transfer_to_contract_testing", std::vector<fc::variant>{fc::variant(amount_to_transfer), fc::variant(asset_symbol), fc::variant(from_account_name), fc::variant(to_contract)}).wait();
             return result.as<std::vector<gdwcore::consensus::Asset>>();
@@ -1053,7 +1053,7 @@ namespace gdwcore {
             fc::variant result = get_json_connection()->async_call("simulator_contract_get_balance", std::vector<fc::variant>{fc::variant(contract)}).wait();
             return result.as<std::vector<gdwcore::consensus::BalanceEntry>>();
         }
-        gdwcore::wallet::WalletTransactionEntry CommonApiRpcClient::simulator_transfer_to_contract(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec)
+        gdwcore::wallet::WalletTransactionEntry CommonApiRpcClient::simulator_transfer_to_contract(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract, double amount_for_exec)
         {
             fc::variant result = get_json_connection()->async_call("simulator_transfer_to_contract", std::vector<fc::variant>{fc::variant(amount_to_transfer), fc::variant(asset_symbol), fc::variant(from_account_name), fc::variant(to_contract), fc::variant(amount_for_exec)}).wait();
             return result.as<gdwcore::wallet::WalletTransactionEntry>();
@@ -1083,7 +1083,7 @@ namespace gdwcore {
             fc::variant result = get_json_connection()->async_call("simulator_contract_call_testing", std::vector<fc::variant>{fc::variant(contract), fc::variant(caller_name), fc::variant(function_name), fc::variant(params)}).wait();
             return result.as<std::vector<gdwcore::consensus::Asset>>();
         }
-        std::vector<gdwcore::consensus::Asset> CommonApiRpcClient::simulator_transfer_to_contract_testing(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract)
+        std::vector<gdwcore::consensus::Asset> CommonApiRpcClient::simulator_transfer_to_contract_testing(const std::string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_name, const std::string& to_contract)
         {
             fc::variant result = get_json_connection()->async_call("simulator_transfer_to_contract_testing", std::vector<fc::variant>{fc::variant(amount_to_transfer), fc::variant(asset_symbol), fc::variant(from_account_name), fc::variant(to_contract)}).wait();
             return result.as<std::vector<gdwcore::consensus::Asset>>();
@@ -1191,7 +1191,7 @@ namespace gdwcore {
             return result.as<std::string>();
         }
 
-        gdwcore::wallet::WalletTransactionEntry CommonApiRpcClient::wallet_transfer_to_contract_build(double amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec)
+        gdwcore::wallet::WalletTransactionEntry CommonApiRpcClient::wallet_transfer_to_contract_build(const string& amount_to_transfer, const std::string& asset_symbol, const std::string& from_account_public_key, const std::string& to_contract, double amount_for_exec)
         {
             fc::variant result = get_json_connection()->async_call("wallet_transfer_to_contract_build", std::vector<fc::variant>{fc::variant(amount_to_transfer), fc::variant(asset_symbol), fc::variant(from_account_public_key), fc::variant(to_contract), fc::variant(amount_for_exec)}).wait();
             return result.as<gdwcore::wallet::WalletTransactionEntry>();
