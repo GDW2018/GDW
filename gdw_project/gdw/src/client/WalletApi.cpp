@@ -337,7 +337,7 @@ namespace gdwcore {
                 if (_chain_db->get_is_in_simulator())
                     FC_THROW_EXCEPTION(simulator_command_forbidden, "in simulator, this command is forbidden, you cannot call it!");
 
-                size_t first = address.find_first_of("U");
+                size_t first = address.find_first_of(GDW_ADDRESS_PREFIX);
                 if (first != std::string::npos&&first == 0)
                 {
                     string strToAccount;

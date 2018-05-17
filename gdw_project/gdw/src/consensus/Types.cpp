@@ -24,7 +24,7 @@ namespace gdwcore {
             try
             {
                 if (is_valid_v1(base58str))
-                    prefix = std::string("U");
+                    prefix = std::string(GDW_ADDRESS_PREFIX);
             }
             catch (...)
             {
@@ -40,7 +40,7 @@ namespace gdwcore {
 
         bool PublicKeyType::is_valid_v1(const std::string& base58str)
         {
-            std::string prefix("U");
+            std::string prefix(GDW_ADDRESS_PREFIX);
             const size_t prefix_len = prefix.size();
             FC_ASSERT(base58str.size() > prefix_len, "Address must be longger than GDW_ADDRESS_PREFIX");
             FC_ASSERT(base58str.substr(0, prefix_len) == prefix, "", ("base58str", base58str));
