@@ -6,10 +6,10 @@ GDW 项目简介:
 ##### 钱包使用:
 
 
-English : [wallet use tutorial](https://github.com/GoldenWorld2018/GDW/blob/master/gdw_project/API%20interface/gdw-docs%201.2.0%20documentation.pdf)
+English : [wallet use tutorial](https://github.com/GDW2018/GDW/raw/master/gdw_project/API%20interface/gdw-docs%201.2.0%20documentation.pdf)
 
 
-Chinese : [钱包使用教程](https://github.com/GoldenWorld2018/GDW/blob/master/gdw_project/API%20interface/gdw-docs%201.2.0%20documentation.pdf)
+Chinese : [钱包使用教程](https://github.com/GDW2018/GDW/raw/master/gdw_project/API%20interface/gdw-docs%201.2.0%20documentation.pdf)
 
 
 什么是GDW?
@@ -25,7 +25,7 @@ GDW垂直黄金领域，是首条链上锚定实物黄金资产的公有链，�
 ### 技术特点
 ###### 1.技术架构
 
-![image](https://raw.githubusercontent.com/GoldenWorld2018/GDW/master/gdw_project/picture/1.png)
+![image](https://github.com/GDW2018/GDW/raw/master/gdw_project/picture/1.png)
 
 ###### 2.数据层
 数据层除了采用标准的区块链链式结构、Merkle 树、哈希函数、非对称加密、
