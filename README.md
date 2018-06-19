@@ -98,7 +98,7 @@ GDW垂直黄金领域，是首条链上锚定实物黄金资产的公有链，�
 对比指标| 比特币 | 以太坊| GDWChain
 ---|---|---|---|
 挖矿算法 | POW | POW| DPOS | 
-出块共识 | 竞争出块| 竞争出块 |竞争出块 | 
+出块共识 | 竞争出块| 竞争出块 |协作出块 | 
 出块周期 | 10分钟| 15秒左右 | 10秒 | 
 孤块可能性 | 高 | 高 | 低 | 
 能源浪费 | 高 | 高 | 低 | 
@@ -118,7 +118,7 @@ sudo apt-get install cmake git libboost-dev libboost-all-dev libncurses5-dev lib
 下载代码
 
 ```
-git clone https://github.com/GoldenWorld2018/GDW.git --recursive
+git clone https://github.com/GDW2018/GDW.git --recursive
 ```
 
 编译 openssl
@@ -168,6 +168,6 @@ make
 License
 -------
 
-Hcash is released under the terms of the MIT license. To get more information please refer to  https://opensource.org/licenses/MIT.
+GDW is released under the terms of the MIT license. To get more information please refer to  https://opensource.org/licenses/MIT.
 
 GDW主链
